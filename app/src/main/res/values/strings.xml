@@ -1,0 +1,18 @@
+<resources>
+    <!--    <string name="app_name">Vian - Marketplace Wedding Organizer</string>-->
+    <string name="app_name">Marketplace Wedding Organizer</string>
+    <string name="text_awal">Choose Wedding Organizer And \nMake Your Wedding Happen</string>
+
+    <string-array name="metode_pembayaran">
+        <item>Online</item>
+        <item>Ditempat</item>
+    </string-array>
+    <string-array name="print_laporan">
+        <item>Pembayaran Online</item>
+        <item>Pembayaran Ditempat</item>
+    </string-array>
+    <string name="ket_klik_file">Klik To Upload File</string>
+    <string name="add_image">Klik Untuk Masukkan Gambar</string>
+
+    <string name="alamat">Maaf alamat belum ada. Klik untuk menambahkan alamat</string>
+</resources>
