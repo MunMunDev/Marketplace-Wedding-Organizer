@@ -27,6 +27,18 @@
         android:theme="@style/Theme.VianMarketplaceWeddingOrganizer"
         tools:targetApi="31" >
         <activity
+            android:name=".ui.activity.user.wedding_organizer.search.SearchVendorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.user.wedding_organizer.detail.WeddingOrganizerDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.user.wedding_organizer.WeddingOrganizerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.user.akun.AkunActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.register.RegisterActivity"
             android:exported="false" />
         <activity
