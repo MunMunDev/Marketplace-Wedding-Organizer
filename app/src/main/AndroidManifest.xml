@@ -36,6 +36,15 @@
             android:name=".ui.activity.user.wedding_organizer.WeddingOrganizerActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.user.akun.AkunActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
