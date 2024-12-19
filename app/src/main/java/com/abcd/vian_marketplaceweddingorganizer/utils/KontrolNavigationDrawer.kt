@@ -7,7 +7,7 @@ import android.content.Intent
 import android.widget.ImageView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.abcd.vian_marketplaceweddingorganizer.MainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity

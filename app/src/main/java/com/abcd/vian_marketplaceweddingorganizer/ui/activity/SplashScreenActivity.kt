@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivitySplashScreenBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
-import com.abcd.vian_marketplaceweddingorganizer.MainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 
 class SplashScreenActivity : AppCompatActivity() {
