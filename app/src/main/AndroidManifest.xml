@@ -27,6 +27,9 @@
         android:theme="@style/Theme.VianMarketplaceWeddingOrganizer"
         tools:targetApi="31" >
         <activity
+            android:name=".ui.activity.user.chat.chat.ChatWeddingOrganizerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity"
             android:exported="false" />
         <activity
