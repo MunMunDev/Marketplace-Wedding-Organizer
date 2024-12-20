@@ -2,4 +2,36 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="text_white">#F3F3F3</color>
+    <color name="bg_white">#F5F5FA</color>
+    <color name="abuabu_muda_sekali">#CCEEEEEE</color>
+    <color name="abuabu_muda">#DDDDDD</color>
+    <color name="abuabu_tua">#767676</color>
+
+    <color name="success">#73B908</color>
+    <color name="danger">#DE252A</color>
+    <color name="merah">#FF0E15</color>
+    <color name="batal">#747496</color>
+    <color name="edit">#F0AD4E</color>
+    <color name="biru">#0A2CA3</color>
+
+    <color name="primaryColor">#339ADB</color>
+    <!--    <color name="secondaryColor">#068251</color>-->
+    <color name="secondaryColor">#5DA6D3</color>
+    <color name="colorPickVendor">#EBF7FF</color>
+    <color name="backgroundTransparent">#B3000000</color>
+    <color name="textJudulTransparent">#FFFFFF</color>
+    <color name="textPenulisTransparent">#DCDCDC</color>
+
+    <color name="startGradient">#242729</color>
+    <color name="centerGradient">#CFD9DF</color>
+    <color name="endGradient">#698595</color>
+
+    <color name="circleColor">#9520B3</color>
+    <color name="circleColor1">#6B9D3A</color>
+    <color name="circleColor2">#F1407C</color>
+    <color name="circleColor3">#008ACC</color>
+    <color name="circleColor4">#789196</color>
+    <color name="circleColor5">#ED6D01</color>
 </resources>
