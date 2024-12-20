@@ -74,7 +74,7 @@ class WeddingOrganizerActivity : AppCompatActivity() {
     private fun getWeddingOrganizer() {
         viewModel.getWeddingOrganizer().observe(this@WeddingOrganizerActivity){result->
             when(result){
-                is UIState.Loading-> loading.alertDialogLoading(this@WeddingOrganizerActivity)
+                is UIState.Loading-> setStartShimmer()
                 is UIState.Failure-> setFailureFetchWeddingOrganizer(result.message)
                 is UIState.Success-> setSuccessFetchWeddingOrganizer(result.data)
             }
@@ -84,7 +84,6 @@ class WeddingOrganizerActivity : AppCompatActivity() {
     private fun setFailureFetchWeddingOrganizer(message: String) {
         Toast.makeText(this@WeddingOrganizerActivity, message, Toast.LENGTH_SHORT).show()
         setStopShimmer()
-        loading.alertDialogCancel()
     }
 
     private fun setSuccessFetchWeddingOrganizer(data: ArrayList<WeddingOrganizerModel>) {
@@ -93,7 +92,6 @@ class WeddingOrganizerActivity : AppCompatActivity() {
         } else{
             Toast.makeText(this@WeddingOrganizerActivity, "Tidak ada data", Toast.LENGTH_SHORT).show()
         }
-        loading.alertDialogCancel()
         setStopShimmer()
     }
 
@@ -146,6 +144,15 @@ class WeddingOrganizerActivity : AppCompatActivity() {
             .placeholder(R.drawable.loading)
             .into(view.ivShowImage) // imageView mana yang akan diterapkan
 
+    }
+
+    private fun setStartShimmer(){
+        binding.apply {
+            smWeddingOrganizer.startShimmer()
+            smWeddingOrganizer.visibility = View.VISIBLE
+
+            rvWeddingOrganizer.visibility = View.GONE
+        }
     }
 
     private fun setStopShimmer(){
