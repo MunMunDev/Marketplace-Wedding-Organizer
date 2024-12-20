@@ -15,8 +15,11 @@ class TestimoniModel (
     @SerializedName("nama_user")
     var nama_user: String? = null,
 
-    @SerializedName("id_plafon")
-    var id_plafon: String? = null,
+    @SerializedName("vendor")
+    var vendor: String? = null,
+
+    @SerializedName("id_wo")
+    var id_wo: String? = null,
 
     @SerializedName("testimoni")
     var testimoni: String? = null,

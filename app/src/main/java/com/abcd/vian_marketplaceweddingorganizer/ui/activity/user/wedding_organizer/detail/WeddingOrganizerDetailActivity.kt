@@ -148,7 +148,7 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
     }
 
     private fun setFailureFetchTestimoni(message: String) {
-
+        Log.d("DetailTAG", "setFailureFetchTestimoni: $message")
     }
 
     private fun setButton() {
