@@ -18,7 +18,7 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.AlamatModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityPaymentBinding
-import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.address.ChooseeAddressActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.address.ChooseAddressActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.Constant
 import com.abcd.vian_marketplaceweddingorganizer.utils.KataAcak
@@ -136,7 +136,7 @@ class PaymentActivity : AppCompatActivity() {
             }
 
             clAlamat.setOnClickListener {
-                val i = Intent(this@PaymentActivity, ChooseeAddressActivity::class.java)
+                val i = Intent(this@PaymentActivity, ChooseAddressActivity::class.java)
                 i.putParcelableArrayListExtra("vendor", vendor)
                 i.putExtra("nama_wedding_organizer", namaWeddingOrganizer)
                 startActivity(i)
