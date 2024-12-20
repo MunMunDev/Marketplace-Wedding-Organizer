@@ -66,7 +66,7 @@ interface ApiService {
         @Query("id_wo") id_wo: Int,
     ): ArrayList<MessageModel>
 
-    @GET("penjualan-plafon/api/get.php")
+    @GET("marketplace-wo/api/get.php")
     suspend fun getTestimoni(
         @Query("get_testimoni") get_testimoni: String,
         @Query("id_wo") id_wo: Int
