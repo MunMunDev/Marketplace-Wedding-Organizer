@@ -20,7 +20,9 @@ import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
