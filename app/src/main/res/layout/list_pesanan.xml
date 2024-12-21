@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    app:cardCornerRadius="12dp"
+    android:backgroundTint="@color/white">
+
+    <ImageView
+        android:id="@+id/ivGambarWO"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/icon_akun"
+        android:scaleType="centerCrop"
+        android:elevation="1dp"/>
+
+    <TextView
+        android:id="@+id/tvJudulWO"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivGambarWO"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:lineSpacingExtra="3dp"
+        android:text="Wedding Organizer"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:elevation="20dp"/>
+
+    <TextView
+        android:id="@+id/tvTitleHarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvJudulWO"
+        app:layout_constraintStart_toEndOf="@id/ivGambarWO"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="12dp"
+        android:maxLines="1"
+        android:text="Harga : "
+        android:textSize="14sp"
+        android:textColor="@color/abuabu_tua"
+        android:elevation="20dp"/>
+
+
+    <TextView
+        android:id="@+id/tvHarga"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvTitleHarga"
+        app:layout_constraintStart_toEndOf="@id/tvTitleHarga"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:maxLines="1"
+        android:text="Rp.10.0000"
+        android:textSize="14sp"
+        android:textColor="@color/abuabu_tua"
+        android:elevation="20dp"/>
+
+    <TextView
+        android:id="@+id/tvTitleVendor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvHarga"
+        app:layout_constraintStart_toEndOf="@id/ivGambarWO"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="12dp"
+        android:maxLines="1"
+        android:text="Vendor : "
+        android:textSize="14sp"
+        android:textColor="@color/abuabu_tua"
+        android:elevation="20dp"/>
+
+
+    <TextView
+        android:id="@+id/tvVendor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvTitleVendor"
+        app:layout_constraintStart_toEndOf="@id/tvTitleVendor"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="Fotografer, fotografer, fotografer, fotografer, fotografer"
+        android:textSize="14sp"
+        android:textColor="@color/abuabu_tua"
+        android:elevation="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.2dp"
+        android:background="@color/abuabu_muda"
+        app:layout_constraintTop_toBottomOf="@+id/ivGambarWO"
+        android:layout_marginTop="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

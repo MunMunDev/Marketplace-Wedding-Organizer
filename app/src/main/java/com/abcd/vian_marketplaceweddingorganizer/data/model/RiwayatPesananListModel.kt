@@ -29,6 +29,9 @@ class RiwayatPesananListModel (
     @SerializedName("vendor")
     val vendor: String? = null,
 
+    @SerializedName("waktu_acara")
+    val waktu_acara: String? = null,
+
     @SerializedName("waktu")
     val waktu: String? = null,
 

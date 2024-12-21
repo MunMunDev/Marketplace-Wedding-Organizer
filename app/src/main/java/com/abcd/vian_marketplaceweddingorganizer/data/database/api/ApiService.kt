@@ -4,6 +4,7 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.AlamatModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.KabKotaModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
@@ -30,6 +31,12 @@ interface ApiService {
         @Query("username") username: String,
         @Query("password") password: String
     ): ArrayList<UsersModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getPesanan(
+        @Query("get_pesanan") get_pesanan: String,
+        @Query("id_user") id_user: Int,
+    ): ArrayList<RiwayatPesananListModel>
 
     @GET("marketplace-wo/api/get.php")
     suspend fun getWeddingOrganizer(

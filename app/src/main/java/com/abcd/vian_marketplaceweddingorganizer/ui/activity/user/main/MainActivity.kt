@@ -4,16 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.abcd.vian_marketplaceweddingorganizer.R
+import com.abcd.vian_marketplaceweddingorganizer.adapter.PesananAdapter
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityMainBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.search.SearchVendorActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
+import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
+import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
@@ -27,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         setNavitagionDrawer()
         setSharedPreferencesLogin()
+        fetchPesanan()
+        getPesanan()
         setButton()
     }
 
@@ -46,6 +54,53 @@ class MainActivity : AppCompatActivity() {
     private fun setSharedPreferencesLogin() {
         sharedPreferencesLogin = SharedPreferencesLogin(this@MainActivity)
         binding.tvNamaUser.text = "Hy, ${sharedPreferencesLogin.getNama()}"
+    }
+
+    private fun fetchPesanan(){
+        viewModel.fetchPesanan(sharedPreferencesLogin.getIdUser())
+    }
+
+    private fun getPesanan(){
+        viewModel.getPesanan().observe(this@MainActivity){result->
+            when(result){
+                is UIState.Loading->{}
+                is UIState.Failure->setFailureFetchPesanan(result.message)
+                is UIState.Success->setSuccessFetchPesanan(result.data)
+            }
+        }
+    }
+
+    private fun setSuccessFetchPesanan(data: ArrayList<RiwayatPesananListModel>) {
+        if(data.isNotEmpty()){
+            binding.apply {
+                rvPesanan.visibility = View.VISIBLE
+                tvNotHavePesanan.visibility = View.GONE
+            }
+            setAdapterPesanan(data)
+        } else{
+            Toast.makeText(this@MainActivity, "Gagal mendapatkan data", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setFailureFetchPesanan(message: String) {
+        Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        binding.apply {
+            rvPesanan.visibility = View.GONE
+            tvNotHavePesanan.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setAdapterPesanan(data: ArrayList<RiwayatPesananListModel>) {
+        val adapter = PesananAdapter(data, object: OnClickItem.ClickPesanan{
+            override fun clickPesanan(idPemesanan: Int) {
+
+            }
+
+        })
+        binding.apply {
+            rvPesanan.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            rvPesanan.adapter = adapter
+        }
     }
 
     private fun setButton() {
