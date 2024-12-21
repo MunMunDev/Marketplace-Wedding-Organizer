@@ -8,6 +8,14 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
 
 interface OnClickItem {
+    interface ClickPesanan{
+        fun clickPesanan(
+            idPemesanan: Int
+        )
+//        fun clickLogoWeddingOrganizer(
+//            namaWO: String, logo: String
+//        )
+    }
     interface ClickWeddingOrganizer{
         fun clickWeddingOrganizer(
             weddingOrganizer: WeddingOrganizerModel
