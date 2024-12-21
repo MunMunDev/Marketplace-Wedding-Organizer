@@ -12,9 +12,6 @@ interface OnClickItem {
         fun clickPesanan(
             idPemesanan: Int
         )
-//        fun clickLogoWeddingOrganizer(
-//            namaWO: String, logo: String
-//        )
     }
     interface ClickWeddingOrganizer{
         fun clickWeddingOrganizer(
@@ -43,6 +40,11 @@ interface OnClickItem {
     interface ClickChatWeddingOrganizer{
         fun clickItemHapus(message: MessageModel)
         fun clickItemGambarHapus(message: MessageModel)
+    }
+    interface ClickRiwayatPesanan{
+        fun clickRiwayatPesanan(
+            idPemesanan: Int
+        )
     }
 
     interface ClickAkun{
