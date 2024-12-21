@@ -1,11 +1,13 @@
 package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abcd.vian_marketplaceweddingorganizer.adapter.RiwayatPesananListAdapter
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.detail.RiwayatPesananDetailActivity
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityRiwayatPesananBinding
 import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
@@ -71,9 +73,9 @@ class RiwayatPesananActivity : AppCompatActivity() {
     private fun setAdapter(data: ArrayList<RiwayatPesananListModel>) {
         val adapter = RiwayatPesananListAdapter(data, object : OnClickItem.ClickRiwayatPesanan{
             override fun clickRiwayatPesanan(idPemesanan: Int) {
-//                val i = Intent(this@RiwayatPesananActivity, RiwayatPesananDetailActivity::class.java)
-//                i.putExtra("idPemesanan", idPemesanan)
-//                startActivity(i)
+                val i = Intent(this@RiwayatPesananActivity, RiwayatPesananDetailActivity::class.java)
+                i.putExtra("idPemesanan", idPemesanan)
+                startActivity(i)
             }
 
         })
