@@ -9,9 +9,11 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListMo
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ListPesananBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ListTestimoniBinding
+import com.abcd.vian_marketplaceweddingorganizer.utils.Constant
 import com.abcd.vian_marketplaceweddingorganizer.utils.KonversiRupiah
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
 import com.abcd.vian_marketplaceweddingorganizer.utils.TanggalDanWaktu
+import com.bumptech.glide.Glide
 import java.lang.Exception
 
 class PesananAdapter(
@@ -42,6 +44,12 @@ class PesananAdapter(
             tvJudulWO.text = wo
             tvHarga.text = harga
             tvVendor.text = vendor
+
+            Glide.with(holder.itemView)
+                .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}${pesanan.logo_wo}") // URL Gambar
+                .error(R.drawable.background_main2)
+                .placeholder(R.drawable.loading)
+                .into(ivGambarWO) // imageView mana yang akan diterapkan
         }
         holder.itemView.setOnClickListener {
             onClick.clickPesanan(pesanan.id_pemesanan!!)
