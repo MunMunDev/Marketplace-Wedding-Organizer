@@ -26,6 +26,9 @@ class RiwayatPesananListModel (
     @SerializedName("wo")
     val wo: String? = null,
 
+    @SerializedName("logo_wo")
+    val logo_wo: String? = null,
+
     @SerializedName("vendor")
     val vendor: String? = null,
 
