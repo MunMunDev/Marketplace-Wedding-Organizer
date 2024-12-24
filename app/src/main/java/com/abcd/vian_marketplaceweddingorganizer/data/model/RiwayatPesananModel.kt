@@ -11,11 +11,11 @@ class RiwayatPesananModel (
     @SerializedName("id_user")
     val id_user: Int? = null,
 
-    @SerializedName("id_wo")
-    val id_wo: Int? = null,
+    @SerializedName("wo")
+    val wo: WeddingOrganizerModel? = null,
 
-    @SerializedName("id_vendor")
-    val id_vendor: Int? = null,
+    @SerializedName("vendor")
+    val vendor: String? = null,
 
     @SerializedName("id_pemesanan")
     val id_pemesanan: Int? = null,
@@ -49,6 +49,9 @@ class RiwayatPesananModel (
 
     @SerializedName("waktu")
     val waktu: String? = null,
+
+    @SerializedName("waktu_acara")
+    val waktu_acara: String? = null,
 
     @SerializedName("waktu_bayar")
     val waktu_bayar: String? = null,
