@@ -14,6 +14,8 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListMo
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityMainBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.RiwayatPesananActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.detail.RiwayatPesananDetailActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.search.SearchVendorActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
@@ -95,9 +97,10 @@ class MainActivity : AppCompatActivity() {
     private fun setAdapterPesanan(data: ArrayList<RiwayatPesananListModel>) {
         val adapter = PesananAdapter(data, object: OnClickItem.ClickPesanan{
             override fun clickPesanan(idPemesanan: Int) {
-
+                val i = Intent(this@MainActivity, RiwayatPesananDetailActivity::class.java)
+                i.putExtra("idPemesanan", idPemesanan)
+                startActivity(i)
             }
-
         })
         binding.apply {
             rvPesanan.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
@@ -122,17 +125,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, WeddingOrganizerActivity::class.java))
             }
             btnRiwayatPembayaran.setOnClickListener {
-//                startActivity(Intent(this@MainActivity, RiwayatPesananActivity::class.java))
+                startActivity(Intent(this@MainActivity, RiwayatPesananActivity::class.java))
             }
             btnAkun.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AkunActivity::class.java))
-            }
-            btnPesan.setOnClickListener {
-//                showDialogPesan(listPesanan)
-//                val i = Intent(this@MainActivity, PaymentActivity::class.java)
-//                i.putParcelableArrayListExtra("pesanan", listPesanan)
-//                startActivity(i)
-//                finish()
             }
         }
     }
