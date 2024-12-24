@@ -5,6 +5,7 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.KabKotaModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
@@ -77,6 +78,24 @@ interface ApiService {
     suspend fun getTestimoni(
         @Query("get_testimoni") get_testimoni: String,
         @Query("id_wo") id_wo: Int
+    ): ArrayList<TestimoniModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getRiwayatPesananList(
+        @Query("get_riwayat_pesanan") get_riwayat_pesanan: String,
+        @Query("id_user") id_user: Int,
+    ): ArrayList<RiwayatPesananListModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getRiwayatPesananDetail(
+        @Query("get_detail_riwayat_pesanan") get_detail_riwayat_pesanan: String,
+        @Query("id_pemesanan") id_pemesanan: Int
+    ): ArrayList<RiwayatPesananModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getTestimoniRiwayatPesanan(
+        @Query("get_testimoni_riwayat_pesanan") get_testimoni_riwayat_pesanan: String,
+        @Query("id_pemesanan") id_pemesanan: Int
     ): ArrayList<TestimoniModel>
 
 
@@ -535,8 +554,8 @@ interface ApiService {
     @POST("marketplace-wo/api/post.php")
     suspend fun postTambahTestimoni(
         @Field("tambah_testimoni") tambah_testimoni:String,
-        @Field("id_pemesanan") id_pemesanan: String,
-        @Field("id_plafon") id_plafon: String,
+        @Field("id_pemesanan") id_pemesanan: Int,
+        @Field("id_wo") id_wo: Int,
         @Field("testimoni") testimoni: String,
         @Field("bintang") bintang: String,
     ): ArrayList<ResponseModel>
