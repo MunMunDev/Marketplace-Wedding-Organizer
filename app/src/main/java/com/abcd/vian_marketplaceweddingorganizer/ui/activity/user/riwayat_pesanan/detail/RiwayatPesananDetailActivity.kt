@@ -120,11 +120,21 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
         idWo = data[0].wo!!.id_wo!!
         val metodePembayaran = data[0].metode_pembayaran!!
         var array = data[0].waktu_acara!!.split(" ")
-        val tanggalAcara = "${tanggalDanWaktu.konversiBulanSingkatan(array[0])} ${tanggalDanWaktu.waktuNoSecond(array[1])}"
-        array = data[0].waktu!!.split(" ")
-        val tanggalPesanan = "${tanggalDanWaktu.konversiBulanSingkatan(array[0])} ${tanggalDanWaktu.waktuNoSecond(array[1])}"
-        array = data[0].waktu_bayar!!.split(" ")
-        val tanggalBayar = "${tanggalDanWaktu.konversiBulanSingkatan(array[0])} ${tanggalDanWaktu.waktuNoSecond(array[1])}"
+        var tanggalAcara = ""
+        var tanggalPesanan = ""
+        var tanggalBayar = ""
+        if(data[0].waktu_acara!!.isNotEmpty()){
+            array = data[0].waktu_acara!!.split(" ")
+            tanggalAcara = "${tanggalDanWaktu.konversiBulanSingkatan(array[0])} ${tanggalDanWaktu.waktuNoSecond(array[1])}"
+        }
+        if(data[0].waktu!!.isNotEmpty()){
+            array = data[0].waktu!!.split(" ")
+            tanggalPesanan = "${tanggalDanWaktu.konversiBulanSingkatan(array[0])} ${tanggalDanWaktu.waktuNoSecond(array[1])}"
+        }
+        if(data[0].waktu_bayar!!.isNotEmpty()){
+            array = data[0].waktu_bayar!!.split(" ")
+            tanggalBayar = "${tanggalDanWaktu.konversiBulanSingkatan(array[0])} ${tanggalDanWaktu.waktuNoSecond(array[1])}"
+        }
         var selesai = data[0].selesai!!
         if(selesai == "0"){
             selesai = "On Progress"
