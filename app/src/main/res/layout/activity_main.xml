@@ -291,16 +291,6 @@
                         tools:itemCount="1"
                         android:visibility="gone" />
 
-                    <Button
-                        android:id="@+id/btnPesan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Pesan"
-                        android:textStyle="bold"
-                        android:background="@drawable/bg_btn"
-                        android:visibility="gone"/>
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
