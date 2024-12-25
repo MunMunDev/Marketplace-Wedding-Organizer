@@ -61,7 +61,6 @@ class WeddingOrganizerAdapter(
                 }
                 tvNamaWeddingOrganizer.text = dataWeddingOrganizer.nama_wo!!
                 tvAlamat.text = dataWeddingOrganizer.alamat_wo
-                tvHarga.text = rupiah.rupiah(dataWeddingOrganizer.harga_wo!!.toLong())
                 tvVendor.text = vendor
 
 //                ivGambarWeddingOrganizer.setOnClickListener {

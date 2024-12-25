@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="130dp"
     android:layout_marginTop="12dp"
     app:cardCornerRadius="12dp"
     android:backgroundTint="@color/white">
@@ -28,10 +28,10 @@
             app:layout_constraintStart_toEndOf="@id/ivGambarWeddingOrganizer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="14dp"
             android:layout_marginEnd="14dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="8dp">
             <TextView
                 android:id="@+id/tvNamaWeddingOrganizer"
                 android:layout_width="0dp"
@@ -77,39 +77,12 @@
                 android:elevation="20dp"/>
 
             <TextView
-                android:id="@+id/tvTitleHarga"
+                android:id="@+id/tvTitleVendor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleAlamat"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="4dp"
-                android:maxLines="1"
-                android:text="Harga : "
-                android:textSize="14sp"
-                android:textColor="@color/abuabu_tua"
-                android:elevation="20dp"/>
-
-            <TextView
-                android:id="@+id/tvHarga"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tvTitleHarga"
-                app:layout_constraintStart_toEndOf="@id/tvTitleHarga"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
-                android:maxLines="1"
-                android:text="Rp.10.0000"
-                android:textSize="14sp"
-                android:textColor="@color/abuabu_tua"
-                android:elevation="20dp"/>
-
-            <TextView
-                android:id="@+id/tvTitleVendor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleHarga"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:maxLines="1"
                 android:text="Vendor : "
                 android:textSize="14sp"
@@ -125,7 +98,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"
                 android:maxLines="2"
-                android:text="Vendor, vendor"
+                android:ellipsize="end"
+                android:text="Vendor, vendor, Vendor, vendor, Vendor, vendor"
                 android:textSize="14sp"
                 android:textColor="@color/abuabu_tua"
                 android:elevation="20dp"/>
