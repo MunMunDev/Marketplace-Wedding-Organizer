@@ -196,6 +196,39 @@
                     android:paddingBottom="10dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_no_radius"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="2dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Tanggal Acara"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textStyle="normal"/>
+                <TextView
+                    android:id="@+id/tvTanggalAcara"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Tanggal"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:gravity="end"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPesanan"
                 android:layout_width="match_parent"
