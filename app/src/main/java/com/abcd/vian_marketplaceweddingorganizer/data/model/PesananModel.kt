@@ -31,7 +31,7 @@ class PesananModel(
     val waktu: String? = null,
 
     @SerializedName("metode_pembayaran")
-    val metode_pembayaran: KabKotaModel? = null,
+    val metode_pembayaran: String? = null,
 
     @SerializedName("ket")
     val ket: KabKotaModel? = null,
