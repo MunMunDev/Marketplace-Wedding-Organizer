@@ -103,6 +103,7 @@ class PaymentActivity : AppCompatActivity() {
                 Toast.makeText(this@PaymentActivity, "Vendor kosong", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.tvTanggalAcara.text = "${tanggalDanWaktu.tanggalSekarangZonaMakassar()} 10:00"
     }
 
     private fun setAppNavbarDrawer() {
@@ -125,6 +126,8 @@ class PaymentActivity : AppCompatActivity() {
             btnBayar.setOnClickListener {
                 if(tvAlamat.text.toString().trim() == resources.getString(R.string.alamat).trim()){
                     Toast.makeText(this@PaymentActivity, "Tolong masukkan alamat anda", Toast.LENGTH_SHORT).show()
+                } else if(tvTanggalAcara.text == resources.getString(R.string.alamat).trim()){
+                    Toast.makeText(this@PaymentActivity, "Tolong masukkan Tanggal Acara", Toast.LENGTH_SHORT).show()
                 } else{
                     if(numberPosition == 0){
 //                        fetchDataRegistrasiPembayaran(uuid, idUser)
@@ -141,6 +144,10 @@ class PaymentActivity : AppCompatActivity() {
                 i.putExtra("nama_wedding_organizer", namaWeddingOrganizer)
                 startActivity(i)
                 finish()
+            }
+
+            tvTanggalAcara.setOnClickListener{
+                catchTanggalDanWaktu()
             }
         }
     }
@@ -478,6 +485,14 @@ class PaymentActivity : AppCompatActivity() {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun catchTanggalDanWaktu(){
+        tanggalDanWaktu.selectedDateTime(
+            tanggalDanWaktu.tanggalSekarangZonaMakassar(),
+            binding.tvTanggalAcara,
+            this@PaymentActivity
+        )
     }
 
     override fun onBackPressed() {
