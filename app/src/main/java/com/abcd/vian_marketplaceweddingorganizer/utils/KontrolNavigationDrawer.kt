@@ -11,7 +11,7 @@ import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActiv
 import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
-import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.RiwayatPesananActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
 
 class KontrolNavigationDrawer(var context: Context) {

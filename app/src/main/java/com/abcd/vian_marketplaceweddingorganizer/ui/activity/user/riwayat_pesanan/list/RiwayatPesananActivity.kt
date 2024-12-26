@@ -1,4 +1,4 @@
-package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan
+package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

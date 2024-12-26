@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.user.riwayat_pesanan.RiwayatPesananActivity"
+    tools:context=".ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity"
     android:id="@+id/drawerLayoutMain">
 
     <androidx.core.widget.NestedScrollView
