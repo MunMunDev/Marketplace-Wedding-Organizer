@@ -87,7 +87,7 @@ class ChatListWeddingOrganizerActivity : AppCompatActivity() {
                     val i = Intent(this@ChatListWeddingOrganizerActivity, ChatWeddingOrganizerActivity::class.java)
                     if(sharedPref.getSebagai() == "user"){
                         i.putExtra("id_received", message.wedding_organizer!!.id_wo)
-                        i.putExtra("nama_wedding_organizer", message.wedding_organizer!!.nama_wo)
+                        i.putExtra("nama_wedding_organizer", message.wedding_organizer!!.nama)
                     } else{
                         i.putExtra("id_received", message.user!!.idUser)
                         i.putExtra("nama_wedding_organizer", message.user!!.nama)

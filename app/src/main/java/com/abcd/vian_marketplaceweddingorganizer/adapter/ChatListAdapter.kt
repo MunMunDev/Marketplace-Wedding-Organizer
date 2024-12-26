@@ -36,7 +36,7 @@ class ChatListAdapter(
         val message = listMessage[position]
         holder.binding.apply {
             val nama = if(sebagai == "user"){
-                message.wedding_organizer!!.nama_wo!!
+                message.wedding_organizer!!.nama!!
             } else{
                 message.user!!.nama!!
             }

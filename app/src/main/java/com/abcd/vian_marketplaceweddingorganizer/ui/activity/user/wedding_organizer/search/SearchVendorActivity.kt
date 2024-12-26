@@ -98,7 +98,7 @@ class SearchVendorActivity : AppCompatActivity() {
 
     private fun setSuccessWeddingOrganizer(data: ArrayList<WeddingOrganizerModel>) {
         loading.alertDialogCancel()
-        val sort = data.sortedWith(compareBy { it.nama_wo })
+        val sort = data.sortedWith(compareBy { it.nama })
         val dataArrayList = arrayListOf<WeddingOrganizerModel>()
         dataArrayList.addAll(sort)
         listWeddingOrganizer = dataArrayList
@@ -106,10 +106,9 @@ class SearchVendorActivity : AppCompatActivity() {
             override fun clickWeddingOrganizer(weddingOrganizer: WeddingOrganizerModel) {
                 val i = Intent(this@SearchVendorActivity, WeddingOrganizerDetailActivity::class.java)
                 i.putExtra("idWeddingOrganizer", weddingOrganizer.id_wo)
-                i.putExtra("nama", weddingOrganizer.nama_wo)
+                i.putExtra("nama", weddingOrganizer.nama)
                 i.putExtra("deskripsi", weddingOrganizer.deskripsi_wo)
-                i.putExtra("alamat", weddingOrganizer.alamat_wo)
-                i.putExtra("harga", weddingOrganizer.harga_wo)
+                i.putExtra("alamat", weddingOrganizer.alamat)
                 i.putExtra("gambarWeddingOrganizer", weddingOrganizer.logo_wo)
                 i.putExtra("vendor", weddingOrganizer.vendor)
                 i.putParcelableArrayListExtra("vendor", weddingOrganizer.vendor)
