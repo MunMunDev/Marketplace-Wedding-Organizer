@@ -3,6 +3,7 @@ package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ class RiwayatPesananActivity : AppCompatActivity() {
         binding = ActivityRiwayatPesananBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setStartShimmer()
         setKontrolNavigationDrawer()
         setSharedPreferencesLogin()
         fetchRiwayatPembayaran()
@@ -59,6 +61,7 @@ class RiwayatPesananActivity : AppCompatActivity() {
     }
 
     private fun setFailureFetchRiwayatPembayaran(message: String) {
+        setStopShimmer()
         Toast.makeText(this@RiwayatPesananActivity, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -68,6 +71,7 @@ class RiwayatPesananActivity : AppCompatActivity() {
         } else{
             Toast.makeText(this@RiwayatPesananActivity, "Tidak ada data Jenis Plafon", Toast.LENGTH_SHORT).show()
         }
+        setStopShimmer()
     }
 
     private fun setAdapter(data: ArrayList<RiwayatPesananListModel>) {
@@ -82,6 +86,22 @@ class RiwayatPesananActivity : AppCompatActivity() {
         binding.apply {
             rvRiwayatPesanan.layoutManager = LinearLayoutManager(this@RiwayatPesananActivity, LinearLayoutManager.VERTICAL, false)
             rvRiwayatPesanan.adapter = adapter
+        }
+    }
+
+    private fun setStartShimmer(){
+        binding.apply {
+            smListPesanan.startShimmer()
+            smListPesanan.visibility = View.VISIBLE
+            rvRiwayatPesanan.visibility = View.GONE
+        }
+    }
+
+    private fun setStopShimmer(){
+        binding.apply {
+            smListPesanan.stopShimmer()
+            smListPesanan.visibility = View.GONE
+            rvRiwayatPesanan.visibility = View.VISIBLE
         }
     }
 }
