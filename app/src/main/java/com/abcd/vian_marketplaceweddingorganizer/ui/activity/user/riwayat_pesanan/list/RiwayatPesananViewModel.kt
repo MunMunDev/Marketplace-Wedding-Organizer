@@ -1,4 +1,4 @@
-package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan
+package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
