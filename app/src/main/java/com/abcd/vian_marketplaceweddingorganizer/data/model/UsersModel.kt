@@ -6,7 +6,10 @@ import com.google.gson.annotations.SerializedName
 
 class UsersModel (
     @SerializedName("id_user")
-    var idUser: String? = null,
+    var idUser: Int? = null,
+
+    @SerializedName("id_wo")
+    var id_wo: Int? = null,
 
     @SerializedName("nama")
     var nama: String? = null,
@@ -27,7 +30,8 @@ class UsersModel (
     var sebagai: String? = null
 ): Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -38,7 +42,8 @@ class UsersModel (
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(idUser)
+        parcel.writeValue(idUser)
+        parcel.writeValue(id_wo)
         parcel.writeString(nama)
         parcel.writeString(alamat)
         parcel.writeString(nomorHp)
