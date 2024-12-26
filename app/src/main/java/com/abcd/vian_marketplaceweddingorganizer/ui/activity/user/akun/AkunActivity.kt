@@ -102,7 +102,8 @@ class AkunActivity : AppCompatActivity() {
 
                 if(!cek){
                     tempUser = UsersModel(
-                        sharedPreferences.getIdUser().toString(),
+                        sharedPreferences.getIdUser(),
+                        sharedPreferences.getIdWO(),
                         etEditNama.text.toString(),
                         etEditNomorHp.text.toString(),
                         etEditAlamat.text.toString(),
@@ -154,7 +155,8 @@ class AkunActivity : AppCompatActivity() {
             if(data[0].status == "0"){
                 Toast.makeText(this@AkunActivity, "Berhasil Update Akun", Toast.LENGTH_SHORT).show()
                 sharedPreferences.setLogin(
-                    tempUser.idUser!!.trim().toInt(),
+                    tempUser.idUser!!,
+                    tempUser.id_wo!!,
                     tempUser.nama!!,
                     tempUser.nomorHp!!,
                     tempUser.alamat!!,
