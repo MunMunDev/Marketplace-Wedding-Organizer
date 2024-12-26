@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setStartShimmer()
         setNavitagionDrawer()
         setSharedPreferencesLogin()
         fetchPesanan()
@@ -83,10 +84,12 @@ class MainActivity : AppCompatActivity() {
         } else{
             Toast.makeText(this@MainActivity, "Gagal mendapatkan data", Toast.LENGTH_SHORT).show()
         }
+        setStopShimmer()
     }
 
     private fun setFailureFetchPesanan(message: String) {
         Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        setStopShimmer()
         binding.apply {
             rvPesanan.visibility = View.GONE
             tvNotHavePesanan.visibility = View.VISIBLE
@@ -129,6 +132,22 @@ class MainActivity : AppCompatActivity() {
             btnAkun.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AkunActivity::class.java))
             }
+        }
+    }
+
+    private fun setStartShimmer(){
+        binding.apply {
+            smListPesanan.startShimmer()
+            smListPesanan.visibility = View.VISIBLE
+            rvPesanan.visibility = View.GONE
+        }
+    }
+
+    private fun setStopShimmer(){
+        binding.apply {
+            smListPesanan.stopShimmer()
+            smListPesanan.visibility = View.GONE
+            rvPesanan.visibility = View.VISIBLE
         }
     }
 
