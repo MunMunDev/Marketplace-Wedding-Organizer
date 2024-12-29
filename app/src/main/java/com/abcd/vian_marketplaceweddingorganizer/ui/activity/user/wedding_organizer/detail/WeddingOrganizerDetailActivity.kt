@@ -76,7 +76,7 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
             namaWeddingOrganizer = intent.getStringExtra("nama")!!
             alamat = intent.getStringExtra("alamat")!!
             deskripsi = intent.getStringExtra("deskripsi")!!
-            harga = intent.getIntExtra("harga", 0)
+//            harga = intent.getIntExtra("harga", 0)
             gambarWeddingOrganizer = intent.getStringExtra("gambarWeddingOrganizer")!!
             vendor = intent.getParcelableArrayListExtra("vendor")!!
 

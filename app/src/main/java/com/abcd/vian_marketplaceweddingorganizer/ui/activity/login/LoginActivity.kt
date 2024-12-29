@@ -108,6 +108,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun successFetchLogin(userModel: ArrayList<UsersModel>){
+        loading.alertDialogCancel()
         var valueIdUser = 0
         userModel[0].idUser?.let {
             valueIdUser = it.toInt()

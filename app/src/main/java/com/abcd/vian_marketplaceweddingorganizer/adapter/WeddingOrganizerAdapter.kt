@@ -22,7 +22,7 @@ class WeddingOrganizerAdapter(
     fun searchData(kata: String){
         val vKata = kata.toLowerCase().trim()
         var data = tempListWeddingOrganizer.filter {
-            it.nama_wo!!.lowercase().trim().contains(vKata)
+            it.nama!!.lowercase().trim().contains(vKata)
         } as ArrayList
         if(data.size==0){
             for(values in tempListWeddingOrganizer){
@@ -59,8 +59,8 @@ class WeddingOrganizerAdapter(
                 for(value in dataWeddingOrganizer.vendor){
                     vendor+="${value.nama_vendor}, "
                 }
-                tvNamaWeddingOrganizer.text = dataWeddingOrganizer.nama_wo!!
-                tvAlamat.text = dataWeddingOrganizer.alamat_wo
+                tvNamaWeddingOrganizer.text = dataWeddingOrganizer.nama!!
+                tvAlamat.text = dataWeddingOrganizer.alamat
                 tvVendor.text = vendor
 
 //                ivGambarWeddingOrganizer.setOnClickListener {

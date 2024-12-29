@@ -15,8 +15,8 @@ class WeddingOrganizerModel (
     @SerializedName("alamat")
     val alamat: String? = null,
 
-    @SerializedName("harga_wo")
-    val harga_wo: Int? = null,
+    @SerializedName("nomor_hp")
+    val nomor_hp: Int? = null,
 
     @SerializedName("logo_wo")
     val logo_wo: String? = null,

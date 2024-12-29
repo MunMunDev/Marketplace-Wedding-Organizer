@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.ChatListAdapter
-import com.abcd.vian_marketplaceweddingorganizer.adapter.ChatWeddingOrganizerAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityChatListWeddingOrganizerBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogHapusBinding
@@ -87,7 +85,7 @@ class ChatListWeddingOrganizerActivity : AppCompatActivity() {
                     val i = Intent(this@ChatListWeddingOrganizerActivity, ChatWeddingOrganizerActivity::class.java)
                     if(sharedPref.getSebagai() == "user"){
                         i.putExtra("id_received", message.wedding_organizer!!.id_wo)
-                        i.putExtra("nama_wedding_organizer", message.wedding_organizer!!.nama_wo)
+                        i.putExtra("nama_wedding_organizer", message.wedding_organizer!!.nama)
                     } else{
                         i.putExtra("id_received", message.user!!.idUser)
                         i.putExtra("nama_wedding_organizer", message.user!!.nama)

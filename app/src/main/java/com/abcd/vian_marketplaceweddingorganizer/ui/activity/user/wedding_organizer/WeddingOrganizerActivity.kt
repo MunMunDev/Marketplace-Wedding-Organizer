@@ -1,10 +1,8 @@
 package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.WeddingOrganizerAdapter
-import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityWeddingOrganizerBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogShowImageBinding
@@ -100,10 +97,9 @@ class WeddingOrganizerActivity : AppCompatActivity() {
             override fun clickWeddingOrganizer(weddingOrganizer: WeddingOrganizerModel) {
                 val i = Intent(this@WeddingOrganizerActivity, WeddingOrganizerDetailActivity::class.java)
                 i.putExtra("idWeddingOrganizer", weddingOrganizer.id_wo)
-                i.putExtra("nama", weddingOrganizer.nama_wo)
+                i.putExtra("nama", weddingOrganizer.nama)
                 i.putExtra("deskripsi", weddingOrganizer.deskripsi_wo)
-                i.putExtra("alamat", weddingOrganizer.alamat_wo)
-                i.putExtra("harga", weddingOrganizer.harga_wo)
+                i.putExtra("alamat", weddingOrganizer.alamat)
                 i.putExtra("gambarWeddingOrganizer", weddingOrganizer.logo_wo)
                 i.putExtra("vendor", weddingOrganizer.vendor)
                 i.putParcelableArrayListExtra("vendor", weddingOrganizer.vendor)
