@@ -112,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
         userModel[0].idUser?.let {
             valueIdUser = it.toInt()
         }
+        val valueIdWO = userModel[0].id_wo!!
         val valueNama = userModel[0].nama.toString()
         val valueAlamat = userModel[0].alamat.toString()
         val valueNomorHp = userModel[0].nomorHp.toString()
@@ -121,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
 
         try{
             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
-            sharedPreferencesLogin.setLogin(valueIdUser, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai)
+            sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai)
             if(valueSebagai=="user"){
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             } else{
