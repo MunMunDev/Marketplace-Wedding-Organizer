@@ -110,7 +110,7 @@ class SearchVendorActivity : AppCompatActivity() {
                 i.putExtra("deskripsi", weddingOrganizer.deskripsi_wo)
                 i.putExtra("alamat", weddingOrganizer.alamat)
                 i.putExtra("gambarWeddingOrganizer", weddingOrganizer.logo_wo)
-                i.putExtra("vendor", weddingOrganizer.vendor)
+//                i.putExtra("vendor", weddingOrganizer.vendor)
                 i.putParcelableArrayListExtra("vendor", weddingOrganizer.vendor)
 
                 startActivity(i)

@@ -1,7 +1,7 @@
 package com.abcd.vian_marketplaceweddingorganizer.utils
 
 object Constant {
-    const val BASE_URL = "http://192.168.17.5/"
+    const val BASE_URL = "http://192.168.17.2/"
 //    const val BASE_URL = "http://192.168.17.7/"
 //    const val BASE_URL = "http://192.168.1.154/"
 //    const val BASE_URL = "http://192.168.167.91/"

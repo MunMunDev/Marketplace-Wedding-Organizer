@@ -9,7 +9,6 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ListChatBinding
 import com.abcd.vian_marketplaceweddingorganizer.utils.Constant
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
-import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 import com.abcd.vian_marketplaceweddingorganizer.utils.TanggalDanWaktu
 import com.bumptech.glide.Glide
 import java.lang.Exception

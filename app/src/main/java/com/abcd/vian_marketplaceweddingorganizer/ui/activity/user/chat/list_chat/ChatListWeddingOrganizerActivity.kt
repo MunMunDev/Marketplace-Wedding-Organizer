@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.ChatListAdapter
-import com.abcd.vian_marketplaceweddingorganizer.adapter.ChatWeddingOrganizerAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityChatListWeddingOrganizerBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogHapusBinding
