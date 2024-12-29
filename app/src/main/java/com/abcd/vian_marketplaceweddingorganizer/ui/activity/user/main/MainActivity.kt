@@ -8,13 +8,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.PesananAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityMainBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity
-import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.RiwayatPesananActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.detail.RiwayatPesananDetailActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.search.SearchVendorActivity
@@ -35,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setStartShimmer()
         setNavitagionDrawer()
         setSharedPreferencesLogin()
         fetchPesanan()
@@ -84,10 +84,12 @@ class MainActivity : AppCompatActivity() {
         } else{
             Toast.makeText(this@MainActivity, "Gagal mendapatkan data", Toast.LENGTH_SHORT).show()
         }
+        setStopShimmer()
     }
 
     private fun setFailureFetchPesanan(message: String) {
         Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        setStopShimmer()
         binding.apply {
             rvPesanan.visibility = View.GONE
             tvNotHavePesanan.visibility = View.VISIBLE
@@ -130,6 +132,22 @@ class MainActivity : AppCompatActivity() {
             btnAkun.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AkunActivity::class.java))
             }
+        }
+    }
+
+    private fun setStartShimmer(){
+        binding.apply {
+            smListPesanan.startShimmer()
+            smListPesanan.visibility = View.VISIBLE
+            rvPesanan.visibility = View.GONE
+        }
+    }
+
+    private fun setStopShimmer(){
+        binding.apply {
+            smListPesanan.stopShimmer()
+            smListPesanan.visibility = View.GONE
+            rvPesanan.visibility = View.VISIBLE
         }
     }
 

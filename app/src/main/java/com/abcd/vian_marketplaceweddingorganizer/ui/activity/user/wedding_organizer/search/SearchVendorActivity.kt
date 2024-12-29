@@ -1,13 +1,17 @@
 package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.search
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.WeddingOrganizerAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivitySearchVendorBinding
@@ -105,9 +109,8 @@ class SearchVendorActivity : AppCompatActivity() {
                 i.putExtra("nama", weddingOrganizer.nama)
                 i.putExtra("deskripsi", weddingOrganizer.deskripsi_wo)
                 i.putExtra("alamat", weddingOrganizer.alamat)
-//                i.putExtra("harga", weddingOrganizer.harga_wo)
                 i.putExtra("gambarWeddingOrganizer", weddingOrganizer.logo_wo)
-                i.putExtra("vendor", weddingOrganizer.vendor)
+//                i.putExtra("vendor", weddingOrganizer.vendor)
                 i.putParcelableArrayListExtra("vendor", weddingOrganizer.vendor)
 
                 startActivity(i)

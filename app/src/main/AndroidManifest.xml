@@ -30,7 +30,7 @@
             android:name=".ui.activity.user.riwayat_pesanan.detail.RiwayatPesananDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.user.riwayat_pesanan.RiwayatPesananActivity"
+            android:name=".ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.user.address.ChooseAddressActivity"

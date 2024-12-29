@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.user.riwayat_pesanan.RiwayatPesananActivity"
+    tools:context=".ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity"
     android:id="@+id/drawerLayoutMain">
 
     <androidx.core.widget.NestedScrollView
@@ -61,7 +61,31 @@
                 tools:listitem="@layout/list_pesanan"
                 tools:itemCount="5"
                 android:nestedScrollingEnabled="false"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/smListPesanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/bgHeader"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="visible">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="6dp">
+                    <include layout="@layout/sm_list_pesanan"/>
+                    <include layout="@layout/sm_list_pesanan"/>
+                    <include layout="@layout/sm_list_pesanan"/>
+                    <include layout="@layout/sm_list_pesanan"/>
+                    <include layout="@layout/sm_list_pesanan"/>
+                    <include layout="@layout/sm_list_pesanan"/>
+                    <include layout="@layout/sm_list_pesanan"/>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
