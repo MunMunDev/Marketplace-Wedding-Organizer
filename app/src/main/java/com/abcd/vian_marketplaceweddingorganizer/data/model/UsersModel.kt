@@ -27,11 +27,20 @@ class UsersModel (
     var password: String? = null,
 
     @SerializedName("sebagai")
-    var sebagai: String? = null
+    var sebagai: String? = null,
+
+    // if login wo
+    @SerializedName("logo")
+    var logo: String? = null,
+
+    @SerializedName("deskripsi")
+    var deskripsi: String? = null
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -50,6 +59,8 @@ class UsersModel (
         parcel.writeString(username)
         parcel.writeString(password)
         parcel.writeString(sebagai)
+        parcel.writeString(logo)
+        parcel.writeString(deskripsi)
     }
 
     override fun describeContents(): Int {

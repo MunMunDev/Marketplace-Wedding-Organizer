@@ -4,12 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityLoginBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.register.RegisterActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.LoadingAlertDialog
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
@@ -120,15 +122,22 @@ class LoginActivity : AppCompatActivity() {
         val valueUsername = userModel[0].username.toString()
         val valuePassword = userModel[0].password.toString()
         val valueSebagai= userModel[0].sebagai.toString()
+        val valueLogo = userModel[0].logo.toString()
+        val valueDeskripsi= userModel[0].deskripsi.toString()
 
         try{
             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
-            sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai)
-            if(valueSebagai=="user"){
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            if(valueSebagai == "wo"){
+                sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai, valueLogo, valueDeskripsi)
+                startActivity(Intent(this@LoginActivity, WeddingOrganizerMainActivity::class.java))
             } else{
-                Toast.makeText(this@LoginActivity, "Aadmin", Toast.LENGTH_SHORT).show()
+                sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai, "", "")
+                if(valueSebagai=="user"){
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                } else{
+                    Toast.makeText(this@LoginActivity, "Aadmin", Toast.LENGTH_SHORT).show()
 //                startActivity(Intent(this@LoginActivity, AdminMainActivity::class.java))
+                }
             }
         } catch (ex: Exception){
             Toast.makeText(this@LoginActivity, "gagal: $ex", Toast.LENGTH_SHORT).show()
