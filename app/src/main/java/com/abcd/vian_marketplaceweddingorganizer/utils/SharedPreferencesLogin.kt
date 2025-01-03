@@ -20,20 +20,20 @@ class SharedPreferencesLogin(val context: Context) {
     var sharedPref = context.getSharedPreferences("sharedpreference_login", Context.MODE_PRIVATE)
     var editPref = sharedPref.edit()
 
-//    fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String){
-//        editPref.apply{
-//            putInt(keyIdUser, id_user)
-//            putInt(keyIdWo, id_wo)
-//            putString(keyNama, nama)
-//            putString(keyNomorHp, nomorHp)
-//            putString(keyAlamat, alamat)
-//            putString(keyUsername, username)
-//            putString(keyPassword, password)
-//            putString(keySebagai, sebagai)
-//
-//            apply()
-//        }
-//    }
+    fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String){
+        editPref.apply{
+            putInt(keyIdUser, id_user)
+            putInt(keyIdWo, id_wo)
+            putString(keyNama, nama)
+            putString(keyNomorHp, nomorHp)
+            putString(keyAlamat, alamat)
+            putString(keyUsername, username)
+            putString(keyPassword, password)
+            putString(keySebagai, sebagai)
+
+            apply()
+        }
+    }
 
     fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String, logo:String, deskripsi:String){
         editPref.apply{
