@@ -112,6 +112,20 @@ interface ApiService {
         @Field("sebagai") sebagai:String
     ): ArrayList<ResponseModel>
 
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun addWo(
+        @Part("add_wo") add_wo: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("nomor_hp") nomor_hp: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("sebagai") sebagai: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
+
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postUpdateUser(
