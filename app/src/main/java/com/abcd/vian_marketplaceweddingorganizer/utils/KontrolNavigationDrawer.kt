@@ -81,7 +81,7 @@ class KontrolNavigationDrawer(var context: Context) {
     }
 
     fun logout(activity: Activity){
-        sharedPreferences.setLogin(0, 0,"", "","", "","", "")
+        sharedPreferences.setLogin(0, 0,"", "","", "","", "","", "")
         context.startActivity(Intent(context, LoginActivity::class.java))
         activity.finish()
 

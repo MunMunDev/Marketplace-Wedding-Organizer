@@ -11,6 +11,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +27,23 @@ class RegisterViewModel @Inject constructor(
             delay(1_000)
             try {
                 val registerUser = api.addUser("", nama, alamat, nomorHp, username, password, sebagai)
+                _registerUser.postValue(UIState.Success(registerUser))
+            } catch (ex: Exception){
+                _registerUser.postValue(UIState.Failure("Gagal : ${ex.message}"))
+            }
+        }
+    }
+
+    fun postRegisterWo(
+        post: RequestBody, nama: RequestBody, alamat: RequestBody,
+        nomorHp: RequestBody, username: RequestBody, password: RequestBody,
+        sebagai: RequestBody, deskripsi: RequestBody, gambar: MultipartBody.Part
+    ){
+        viewModelScope.launch(Dispatchers.IO) {
+            _registerUser.postValue(UIState.Loading)
+            delay(1_000)
+            try {
+                val registerUser = api.addWo(post, nama, alamat, nomorHp, username, password, sebagai, deskripsi, gambar)
                 _registerUser.postValue(UIState.Success(registerUser))
             } catch (ex: Exception){
                 _registerUser.postValue(UIState.Failure("Gagal : ${ex.message}"))
