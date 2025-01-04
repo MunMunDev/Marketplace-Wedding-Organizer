@@ -8,6 +8,9 @@
             android:id="@+id/woNavDrawerHome"
             android:title="Halaman Home"/>
         <item
+            android:id="@+id/woNavDrawerVendor"
+            android:title="Vendor"/>
+        <item
             android:id="@+id/woNavDrawerChat"
             android:title="Chat"/>
         <item

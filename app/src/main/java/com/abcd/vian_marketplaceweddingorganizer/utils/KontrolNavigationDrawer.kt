@@ -15,6 +15,7 @@ import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.vendor.WeddingOrganizerVendorActivity
 
 class KontrolNavigationDrawer(var context: Context) {
     var sharedPreferences = SharedPreferencesLogin(context)
@@ -64,6 +65,11 @@ class KontrolNavigationDrawer(var context: Context) {
                 when(it.itemId){
                     R.id.woNavDrawerHome -> {
                         val intent = Intent(context, WeddingOrganizerMainActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.woNavDrawerVendor -> {
+                        val intent = Intent(context, WeddingOrganizerVendorActivity::class.java)
                         context.startActivity(intent)
                         activity.finish()
                     }
