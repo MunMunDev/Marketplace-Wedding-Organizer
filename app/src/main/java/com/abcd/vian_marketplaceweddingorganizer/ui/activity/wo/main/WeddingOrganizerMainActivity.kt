@@ -14,14 +14,20 @@ import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 class WeddingOrganizerMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWeddingOrganizerMainBinding
     private lateinit var kontrolNavigationDrawer: KontrolNavigationDrawer
+    private lateinit var sharedPreferencesLogin: SharedPreferencesLogin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWeddingOrganizerMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSharedPreferencesLogin()
         setAppNavBar()
         setKontrolNavigationDrawer()
         setButton()
+    }
+
+    private fun setSharedPreferencesLogin() {
+        sharedPreferencesLogin = SharedPreferencesLogin(this@WeddingOrganizerMainActivity)
     }
 
     private fun setAppNavBar() {
@@ -29,7 +35,8 @@ class WeddingOrganizerMainActivity : AppCompatActivity() {
             ivBack.visibility = View.GONE
             ivNavDrawer.visibility = View.VISIBLE
 
-            tvTitle.text = "Halaman Wedding Organizer"
+//            tvTitle.text = "Halaman Wedding Organizer"
+            tvTitle.text = sharedPreferencesLogin.getNama()
         }
     }
 
