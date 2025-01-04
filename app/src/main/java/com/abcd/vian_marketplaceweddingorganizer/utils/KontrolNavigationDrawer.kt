@@ -11,8 +11,10 @@ import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActiv
 import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
 
 class KontrolNavigationDrawer(var context: Context) {
     var sharedPreferences = SharedPreferencesLogin(context)
@@ -20,6 +22,9 @@ class KontrolNavigationDrawer(var context: Context) {
         if(sharedPreferences.getSebagai() == "user"){
             navigation.menu.clear()
             navigation.inflateMenu(R.menu.nav_menu_user)
+        } else if(sharedPreferences.getSebagai() == "wo"){
+            navigation.menu.clear()
+            navigation.inflateMenu(R.menu.nav_menu_wo)
         }
         else if(sharedPreferences.getSebagai() == "admin"){
             navigation.menu.clear()
@@ -52,6 +57,37 @@ class KontrolNavigationDrawer(var context: Context) {
                         activity.finish()
                     }
                     R.id.userBtnKeluar ->{
+                        logout(activity)
+                    }
+                }
+            } else if(sharedPreferences.getSebagai() == "wo"){
+                when(it.itemId){
+                    R.id.woNavDrawerHome -> {
+                        val intent = Intent(context, WeddingOrganizerMainActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.woNavDrawerChat -> {
+                        val intent = Intent(context, ChatListWeddingOrganizerActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.woNavDrawerPesanan -> {
+//                        val intent = Intent(context, WeddingOrganizerPesananActivity::class.java)
+//                        context.startActivity(intent)
+//                        activity.finish()
+                    }
+                    R.id.woNavDrawerRiwayatPesanan -> {
+//                        val intent = Intent(context, WeddingOrganizerRiwayatPesananActivity::class.java)
+//                        context.startActivity(intent)
+//                        activity.finish()
+                    }
+                    R.id.woNavDrawerAkun -> {
+//                        val intent = Intent(context, WeddingOrganizerAkunActivity::class.java)
+//                        context.startActivity(intent)
+//                        activity.finish()
+                    }
+                    R.id.woBtnKeluar ->{
                         logout(activity)
                     }
                 }
