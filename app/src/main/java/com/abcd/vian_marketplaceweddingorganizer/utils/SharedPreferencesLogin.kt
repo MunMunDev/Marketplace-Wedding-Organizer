@@ -15,7 +15,7 @@ class SharedPreferencesLogin(val context: Context) {
 
     // If login Wedding Organizer
     val keyLogo = "keyLogo"
-    val keyDeskrispi = "keyDeskrispi"
+    val keyDeskripsi = "keyDeskripsi"
 
     var sharedPref = context.getSharedPreferences("sharedpreference_login", Context.MODE_PRIVATE)
     var editPref = sharedPref.edit()
@@ -35,7 +35,7 @@ class SharedPreferencesLogin(val context: Context) {
         }
     }
 
-    fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String, logo:String, deskripsi:String){
+    fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String, deskripsi:String, logo:String){
         editPref.apply{
             putInt(keyIdUser, id_user)
             putInt(keyIdWo, id_wo)
@@ -45,6 +45,8 @@ class SharedPreferencesLogin(val context: Context) {
             putString(keyUsername, username)
             putString(keyPassword, password)
             putString(keySebagai, sebagai)
+            putString(keyDeskripsi, deskripsi)
+            putString(keyLogo, logo)
 
             apply()
         }
@@ -73,5 +75,11 @@ class SharedPreferencesLogin(val context: Context) {
     }
     fun getSebagai(): String{
         return sharedPref.getString(keySebagai, "").toString()
+    }
+    fun keyDeskripsi(): String{
+        return sharedPref.getString(keyDeskripsi, "").toString()
+    }
+    fun getLogo(): String{
+        return sharedPref.getString(keyLogo, "").toString()
     }
 }
