@@ -35,7 +35,7 @@ class SharedPreferencesLogin(val context: Context) {
         }
     }
 
-    fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String, logo:String, deskripsi:String){
+    fun setLogin(id_user:Int, id_wo:Int, nama:String, alamat:String, nomorHp:String, username:String, password:String, sebagai:String, deskripsi:String, logo:String){
         editPref.apply{
             putInt(keyIdUser, id_user)
             putInt(keyIdWo, id_wo)
@@ -45,6 +45,8 @@ class SharedPreferencesLogin(val context: Context) {
             putString(keyUsername, username)
             putString(keyPassword, password)
             putString(keySebagai, sebagai)
+            putString(keyDeskrispi, deskripsi)
+            putString(keyLogo, logo)
 
             apply()
         }
