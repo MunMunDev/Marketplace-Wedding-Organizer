@@ -8,10 +8,10 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListMo
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -97,6 +97,14 @@ interface ApiService {
         @Query("get_testimoni_riwayat_pesanan") get_testimoni_riwayat_pesanan: String,
         @Query("id_pemesanan") id_pemesanan: Int
     ): ArrayList<TestimoniModel>
+
+    // Wedding organizer
+    // Vendor
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerVendor(
+        @Query("get_wo_vendor") get_wo_vendor: String,
+        @Query("id_wo") id_wo: Int
+    ): ArrayList<VendorModel>
 
 
     // POST
@@ -270,11 +278,29 @@ interface ApiService {
     // Post Jenis Plafon
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
-    suspend fun postTambahJenisPlafon(
-        @Field("tambah_jenis_plafon") tambahJenisPlafon: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("keunggulan") keunggulan: String
+    suspend fun postTambahVendor(
+        @Field("post_wo_tambah_vendor") post_wo_tambah_vendor: String,
+        @Field("id_wo") id_wo: Int,
+        @Field("nama_vendor") nama_vendor: String,
+        @Field("harga") harga: Int
     ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateVendor(
+        @Field("post_wo_update_vendor") post_wo_update_vendor: String,
+        @Field("id_vendor") id_vendor: Int,
+        @Field("nama_vendor") nama_vendor: String,
+        @Field("harga") harga: Int
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postDeleteVendor(
+        @Field("post_wo_delete_vendor") post_wo_delete_vendor:String,
+        @Field("id_vendor") id_vendor: Int
+    ): ArrayList<ResponseModel>
+
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
