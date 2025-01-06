@@ -51,4 +51,12 @@ interface OnClickItem {
         fun clickItemSetting(akun: UsersModel, it: View)
         fun clickItemAlamat(alamat: String, it: View)
     }
+
+    // Wedding organizer
+    // Vendor
+
+    interface ClickWeddingOrganizerVendor{
+        fun clickItemVendor(vendor: VendorModel, it: View)
+        fun clickItemSetting(vendor: VendorModel, it: View)
+    }
 }
