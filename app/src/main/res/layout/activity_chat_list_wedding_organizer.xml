@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity">
+    tools:context=".ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity">
     <include
         android:id="@+id/app_navbar_drawer"
         layout="@layout/appbar_nav_drawer"/>

@@ -1,4 +1,4 @@
-package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat
+package com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +12,7 @@ import com.abcd.vian_marketplaceweddingorganizer.adapter.ChatListAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityChatListWeddingOrganizerBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogHapusBinding
-import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.chat.ChatWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.chat.ChatWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState

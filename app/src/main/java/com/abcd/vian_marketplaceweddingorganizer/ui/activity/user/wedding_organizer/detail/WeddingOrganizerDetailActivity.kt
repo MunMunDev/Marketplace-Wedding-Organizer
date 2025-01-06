@@ -24,7 +24,7 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.WeddingOrganizerModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityWeddingOrganizerDetailBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.BottomSheetDialogBinding
-import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.chat.ChatWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.chat.ChatWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.payment.PaymentActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.Constant
 import com.abcd.vian_marketplaceweddingorganizer.utils.KonversiRupiah

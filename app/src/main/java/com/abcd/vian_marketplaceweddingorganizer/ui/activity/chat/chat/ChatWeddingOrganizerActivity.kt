@@ -1,4 +1,4 @@
-package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.chat
+package com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.chat
 
 import android.Manifest
 import android.annotation.SuppressLint
