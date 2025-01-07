@@ -53,7 +53,7 @@ class ChatWeddingOrganizerAdapter(
             } else{
                 if(a == null){
                     tempList.remove(values)
-                    Log.d(TAG, "deleteMessage: ${values.gambar}")
+                    Log.d(TAG, "deleteMessage: ${values.user!!.logo_wo}")
                 }
             }
         }
@@ -155,7 +155,7 @@ class ChatWeddingOrganizerAdapter(
             //Tampilkan Gambar Diterima
             val viewHolder = holder as ReceivedViewHolderGambar
             Glide.with(holder.itemView)
-                .load("https://aplikasi-tugas.my.id/rusly/gambar/${list.gambar}") // URL Gambar
+                .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}${list.gambar}") // URL Gambar
                 .error(R.drawable.background_main2)
                 .into(viewHolder.receivedMessageGambar) // imageView mana yang akan diterapkan
         }
@@ -185,39 +185,38 @@ class ChatWeddingOrganizerAdapter(
     override fun getItemViewType(position: Int): Int {
         val currentMessage = messageList[position]
 
-        if(currentMessage.pengirim == "user"){
-            Log.d(TAG, "user: ")
-            if(currentMessage.idUser == id){
-                if(currentMessage.message.toString().trim().isEmpty()){
-                    return ITEM_SENT_IMAGE
-                } else{
-                    return ITEM_SENT
-                }
-            }
-            else{
-                if(currentMessage.message.toString().trim().isEmpty()){
-                    return ITEM_RECEIVED_IMAGE
-                } else{
-                    return ITEM_RECEIVED
-                }
-            }
-        } else{
-            Log.d(TAG, "wo: ")
-            if(currentMessage.idWo == id){
-                if(currentMessage.message.toString().trim().isEmpty()){
-                    return ITEM_SENT_IMAGE
-                } else{
-                    return ITEM_SENT
-                }
-            }
-            else{
-                if(currentMessage.message.toString().trim().isEmpty()){
-                    return ITEM_RECEIVED_IMAGE
-                } else{
-                    return ITEM_RECEIVED
-                }
+        if(currentMessage.id_pengirim == id){
+            return if(currentMessage.message.toString().trim().isEmpty()){
+                ITEM_SENT_IMAGE
+            } else{
+                ITEM_SENT
             }
         }
+        else{
+            return if(currentMessage.message.toString().trim().isEmpty()){
+                ITEM_RECEIVED_IMAGE
+            } else{
+                ITEM_RECEIVED
+            }
+        }
+
+//        else{
+//            Log.d(TAG, "wo: ")
+//            if(currentMessage.idWo == id){
+//                if(currentMessage.message.toString().trim().isEmpty()){
+//                    return ITEM_SENT_IMAGE
+//                } else{
+//                    return ITEM_SENT
+//                }
+//            }
+//            else{
+//                if(currentMessage.message.toString().trim().isEmpty()){
+//                    return ITEM_RECEIVED_IMAGE
+//                } else{
+//                    return ITEM_RECEIVED
+//                }
+//            }
+//        }
     }
 
     class SentViewHolder(v: View): RecyclerView.ViewHolder(v){

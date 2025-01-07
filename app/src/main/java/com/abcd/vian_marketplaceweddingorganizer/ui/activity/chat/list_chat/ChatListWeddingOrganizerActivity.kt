@@ -13,6 +13,7 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityChatListWeddingOrganizerBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogHapusBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.chat.ChatWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
@@ -24,33 +25,52 @@ class ChatListWeddingOrganizerActivity : AppCompatActivity() {
     private val viewModel: ChatListWeddingOrganizerViewModel by viewModels()
     private lateinit var sharedPref: SharedPreferencesLogin
     private lateinit var listMessageAdapter: ChatListAdapter
+    private lateinit var kontrolNavigationDrawer: KontrolNavigationDrawer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatListWeddingOrganizerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setConfiguration()
         setButton()
-        setData()
         fetchChatListWeddingOrganizer(sharedPref.getIdUser())
         getChatListWeddingOrganizer()
     }
 
+    private fun setConfiguration() {
+        setKontrolNavigationDrawer()
+        sharedPref = SharedPreferencesLogin(this@ChatListWeddingOrganizerActivity)
+
+        binding.appNavbarDrawer.apply {
+            tvTitle.text = "List Chat"
+
+            if(sharedPref.getSebagai() == "user"){
+                ivBack.visibility = View.VISIBLE
+                ivNavDrawer.visibility = View.GONE
+            } else{
+                ivBack.visibility = View.GONE
+                ivNavDrawer.visibility = View.VISIBLE
+            }
+
+        }
+    }
+
     private fun setButton() {
         binding.apply {
-            appNavbarDrawer.ivBack.setOnClickListener{
-                finish()
+            appNavbarDrawer.apply {
+                ivBack.setOnClickListener{
+                    finish()
+                }
+
             }
         }
     }
 
-    private fun setData() {
-        sharedPref = SharedPreferencesLogin(this@ChatListWeddingOrganizerActivity)
-
-        binding.appNavbarDrawer.apply {
-            ivBack.visibility = View.VISIBLE
-            ivNavDrawer.visibility = View.GONE
-
-            tvTitle.text = "List Chat"
+    private fun setKontrolNavigationDrawer() {
+        binding.apply {
+            kontrolNavigationDrawer = KontrolNavigationDrawer(this@ChatListWeddingOrganizerActivity)
+            kontrolNavigationDrawer.cekSebagai(navView)
+            kontrolNavigationDrawer.onClickItemNavigationDrawer(navView, drawerLayoutMain, appNavbarDrawer.ivNavDrawer, this@ChatListWeddingOrganizerActivity)
         }
     }
 
@@ -83,13 +103,16 @@ class ChatListWeddingOrganizerActivity : AppCompatActivity() {
             object: OnClickItem.ClickChatListWeddingOrganizer{
                 override fun clickDetailChat(message: MessageModel) {
                     val i = Intent(this@ChatListWeddingOrganizerActivity, ChatWeddingOrganizerActivity::class.java)
-                    if(sharedPref.getSebagai() == "user"){
-                        i.putExtra("id_received", message.wedding_organizer!!.id_wo)
-                        i.putExtra("nama_wedding_organizer", message.wedding_organizer!!.nama)
-                    } else{
-                        i.putExtra("id_received", message.user!!.idUser)
-                        i.putExtra("nama_wedding_organizer", message.user!!.nama)
-                    }
+                    i.putExtra("id_received", message.id_penerima)
+                    i.putExtra("nama_wedding_organizer", message.user!!.nama)
+
+//                    if(sharedPref.getSebagai() == "user"){
+//                        i.putExtra("id_received", message.wedding_organizer!!.id_wo)
+//                        i.putExtra("nama_wedding_organizer", message.wedding_organizer!!.nama)
+//                    } else{
+//                        i.putExtra("id_received", message.user!!.idUser)
+//                        i.putExtra("nama_wedding_organizer", message.user!!.nama)
+//                    }
                     startActivity(i)
                 }
 

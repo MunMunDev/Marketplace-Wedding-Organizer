@@ -122,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
         val valueUsername = userModel[0].username.toString()
         val valuePassword = userModel[0].password.toString()
         val valueSebagai= userModel[0].sebagai.toString()
-        val valueLogo = userModel[0].logo.toString()
+        val valueLogo = userModel[0].logo_wo.toString()
         val valueDeskripsi= userModel[0].deskripsi.toString()
 
         try{

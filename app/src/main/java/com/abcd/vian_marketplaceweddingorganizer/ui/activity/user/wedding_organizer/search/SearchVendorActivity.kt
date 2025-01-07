@@ -105,7 +105,7 @@ class SearchVendorActivity : AppCompatActivity() {
         adapter = WeddingOrganizerAdapter(listWeddingOrganizer, object : OnClickItem.ClickWeddingOrganizer{
             override fun clickWeddingOrganizer(weddingOrganizer: WeddingOrganizerModel) {
                 val i = Intent(this@SearchVendorActivity, WeddingOrganizerDetailActivity::class.java)
-                i.putExtra("idWeddingOrganizer", weddingOrganizer.id_wo)
+                i.putExtra("idWeddingOrganizer", weddingOrganizer.id_user)
                 i.putExtra("nama", weddingOrganizer.nama)
                 i.putExtra("deskripsi", weddingOrganizer.deskripsi_wo)
                 i.putExtra("alamat", weddingOrganizer.alamat)

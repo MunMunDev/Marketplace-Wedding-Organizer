@@ -30,11 +30,12 @@ class UsersModel (
     var sebagai: String? = null,
 
     // if login wo
-    @SerializedName("logo")
-    var logo: String? = null,
 
     @SerializedName("deskripsi")
-    var deskripsi: String? = null
+    var deskripsi: String? = null,
+
+    @SerializedName("logo_wo")
+    var logo_wo: String? = null,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -59,7 +60,7 @@ class UsersModel (
         parcel.writeString(username)
         parcel.writeString(password)
         parcel.writeString(sebagai)
-        parcel.writeString(logo)
+        parcel.writeString(logo_wo)
         parcel.writeString(deskripsi)
     }
 
