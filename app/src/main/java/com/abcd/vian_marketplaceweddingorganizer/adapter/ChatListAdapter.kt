@@ -34,11 +34,8 @@ class ChatListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = listMessage[position]
         holder.binding.apply {
-            val nama = if(sebagai == "user"){
-                message.wedding_organizer!!.nama!!
-            } else{
-                message.user!!.nama!!
-            }
+            val nama = message.user!!.nama!!
+
             val tanggal = tanggalDanWaktu.konversiBulan(message.tanggal!!)
             val valueMessage = if(message.message!!.isNotEmpty()){
                 message.message!!
@@ -58,7 +55,7 @@ class ChatListAdapter(
                 cvLogo.visibility = View.VISIBLE
 
                 Glide.with(holder.itemView)
-                    .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}${message.wedding_organizer!!.logo_wo}") // URL Gambar
+                    .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}${message.user!!.logo_wo}") // URL Gambar
                     .error(R.drawable.background_main2)
                     .placeholder(R.drawable.loading)
                     .into(ivLogo) // imageView mana yang akan diterapkan

@@ -1,4 +1,4 @@
-package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.chat
+package com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.chat
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -111,25 +111,27 @@ class ChatWeddingOrganizerActivity : AppCompatActivity() {
             btnSendMessage.setOnClickListener {
                 if(etMessage.text.trim().isNotEmpty()){
                     // Kirim data
-                    if(sharedPref.getSebagai() == "user"){
-                        // user
-                        postMessage(sharedPref.getIdUser(), idReceived!!, etMessage.text.toString().trim(), "user")
-                    } else{
-                        // wo
-                        postMessage(idReceived!!, sharedPref.getIdUser(), etMessage.text.toString().trim(), "wo")
-                    }
+                    postMessage(sharedPref.getIdUser(), idReceived!!, etMessage.text.toString().trim(), sharedPref.getSebagai())
+
+//                    if(sharedPref.getSebagai() == "user"){
+//                        // user
+//                        postMessage(sharedPref.getIdUser(), idReceived!!, etMessage.text.toString().trim(), "user")
+//                    } else{
+//                        // wo
+//                        postMessage(idReceived!!, sharedPref.getIdUser(), etMessage.text.toString().trim(), "wo")
+//                    }
                 }
             }
         }
     }
 
     private fun postMessage(
-        idUser: Int,
-        idWo: Int,
+        idPengirim: Int,
+        idPenerima: Int,
         message: String,
         pengirim: String,
     ){
-        viewModel.postMessage(message, idUser, idWo, pengirim)
+        viewModel.postMessage(message, idPengirim, idPenerima, pengirim)
     }
 
     private fun getResponseMessage(){
@@ -303,15 +305,17 @@ class ChatWeddingOrganizerActivity : AppCompatActivity() {
             var idUser = convertStringToMultipartBody(sharedPref.getIdUser().toString())
             var idReceivedTemp = convertStringToMultipartBody(idReceived.toString())
 
-            if(sharedPref.getSebagai() == "user"){
-                val fileName = "${idMessageImageUser()}.$ekstensi"
-                Log.d(TAG, "file: $fileImage")
-                Log.d(TAG, "name: $fileName")
-                postMessageImage(post, fileImage!!, fileName, idUser, idReceivedTemp, "user")
-            }else{
-                val fileName = "${idMessageImageWo()}.$ekstensi"
-                postMessageImage(post, fileImage!!, fileName, idReceivedTemp, idUser, "wo")
-            }
+            val fileName = "${idMessageImageUser()}.$ekstensi"
+            postMessageImage(post, fileImage!!, fileName, idUser, idReceivedTemp, sharedPref.getSebagai())
+//            if(sharedPref.getSebagai() == "user"){
+//                val fileName = "${idMessageImageUser()}.$ekstensi"
+//                Log.d(TAG, "file: $fileImage")
+//                Log.d(TAG, "name: $fileName")
+//                postMessageImage(post, fileImage!!, fileName, idUser, idReceivedTemp, "user")
+//            }else{
+//                val fileName = "${idMessageImageWo()}.$ekstensi"
+//                postMessageImage(post, fileImage!!, fileName, idReceivedTemp, idUser, "wo")
+//            }
         }
     }
 
@@ -319,8 +323,8 @@ class ChatWeddingOrganizerActivity : AppCompatActivity() {
         post: RequestBody,
         fileImage: MultipartBody.Part,
         fileName: String,
-        idUser: RequestBody,
-        idReceived: RequestBody,
+        idPengirim: RequestBody,
+        idPenerima: RequestBody,
         pengirim: String,
 
     ) {
@@ -328,7 +332,7 @@ class ChatWeddingOrganizerActivity : AppCompatActivity() {
         val pengirimTemp = convertStringToMultipartBody(pengirim)
 
         viewModel.postMessageImage(
-            post, fileImage, namaImage, idUser, idReceived, pengirimTemp
+            post, fileImage, namaImage, idPengirim, idPenerima, pengirimTemp
         )
     }
 

@@ -12,7 +12,7 @@ import com.abcd.vian_marketplaceweddingorganizer.adapter.PesananAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityMainBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
-import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.detail.RiwayatPesananDetailActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity

@@ -45,10 +45,10 @@
             android:name=".ui.activity.user.payment.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.user.chat.chat.ChatWeddingOrganizerActivity"
+            android:name=".ui.activity.chat.chat.ChatWeddingOrganizerActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.user.chat.list_chat.ChatListWeddingOrganizerActivity"
+            android:name=".ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.user.akun.AkunActivity"

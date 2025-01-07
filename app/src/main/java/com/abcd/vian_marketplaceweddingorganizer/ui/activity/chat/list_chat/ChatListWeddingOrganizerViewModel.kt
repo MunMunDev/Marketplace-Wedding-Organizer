@@ -1,4 +1,4 @@
-package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.chat.list_chat
+package com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

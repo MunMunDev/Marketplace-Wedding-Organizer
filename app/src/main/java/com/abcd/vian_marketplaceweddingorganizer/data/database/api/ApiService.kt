@@ -64,14 +64,14 @@ interface ApiService {
     @GET("marketplace-wo/api/get.php")
     suspend fun getChatListWeddingOrganizer(
         @Query("get_list_chat") get_list_chat: String,
-        @Query("id_user") id_user: Int,
+        @Query("id_pengirim") id_pengirim: Int,
     ): ArrayList<MessageModel>
 
     @GET("marketplace-wo/api/get.php")
     suspend fun getChatWeddingOrganizer(
         @Query("get_chat_wedding_organizer") get_chat_wedding_organizer: String,
-        @Query("id_user") id_user: Int,
-        @Query("id_wo") id_wo: Int,
+        @Query("id_pengirim") id_pengirim: Int,
+        @Query("id_penerima") id_penerima: Int,
     ): ArrayList<MessageModel>
 
     @GET("marketplace-wo/api/get.php")
@@ -160,8 +160,8 @@ interface ApiService {
     suspend fun postMessage(
         @Field("post_message") post_message:String,
         @Field("message") message: String,
-        @Field("id_user") id_user: Int,
-        @Field("id_wo") id_wo: Int,
+        @Field("id_pengirim") id_pengirim: Int,
+        @Field("id_penerima") id_penerima: Int,
         @Field("pengirim") pengirim: String,
     ): ArrayList<ResponseModel>
 
@@ -171,8 +171,8 @@ interface ApiService {
         @Part("post_message_image") post_message_image: RequestBody,
         @Part gambar: MultipartBody.Part,
         @Part("nama_image") nama_image: RequestBody,
-        @Part("id_user") id_user: RequestBody,
-        @Part("id_wo") id_wo: RequestBody,
+        @Part("id_pengirim") id_pengirim: RequestBody,
+        @Part("id_penerima") id_penerima: RequestBody,
         @Part("pengirim") pengirim: RequestBody,
     ): ArrayList<ResponseModel>
 

@@ -14,11 +14,11 @@ class MessageModel(
     @SerializedName("gambar")
     var gambar: String? = null,
 
-    @SerializedName("id_user")
-    var idUser: Int? = null,
+    @SerializedName("id_pengirim")
+    var id_pengirim: Int? = null,
 
-    @SerializedName("id_wo")
-    var idWo: Int? = null,
+    @SerializedName("id_penerima")
+    var id_penerima: Int? = null,
 
     @SerializedName("pengirim")
     var pengirim: String? = null,
@@ -32,11 +32,11 @@ class MessageModel(
     @SerializedName("ket")
     var ket: String? = null,
 
-    @SerializedName("wedding_organizer")
-    var wedding_organizer: WeddingOrganizerModel? = null,
-
     @SerializedName("user")
     var user: UsersModel? = null,
+
+//    @SerializedName("wedding_organizer")
+//    var wedding_organizer: WeddingOrganizerModel? = null,
 
 ): Parcelable {
     constructor(parcel: Parcel) : this(
@@ -49,7 +49,6 @@ class MessageModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        TODO("wedding_organizer"),
         parcel.readParcelable(UsersModel::class.java.classLoader)
     ) {
     }
@@ -58,8 +57,8 @@ class MessageModel(
         parcel.writeValue(idMessage)
         parcel.writeString(message)
         parcel.writeString(gambar)
-        parcel.writeValue(idUser)
-        parcel.writeValue(idWo)
+        parcel.writeValue(id_pengirim)
+        parcel.writeValue(id_penerima)
         parcel.writeString(pengirim)
         parcel.writeString(tanggal)
         parcel.writeString(waktu)
