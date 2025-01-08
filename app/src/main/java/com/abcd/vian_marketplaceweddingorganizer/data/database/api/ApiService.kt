@@ -106,6 +106,26 @@ interface ApiService {
         @Query("id_wo") id_wo: Int
     ): ArrayList<VendorModel>
 
+    // Pesanan
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerPesananList(
+        @Query("get_wo_pesanan") get_wo_pesanan: String,
+        @Query("id_wo") id_wo: Int,
+    ): ArrayList<RiwayatPesananListModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerRiwayatPesananList(
+        @Query("get_wo_riwayat_pesanan") get_wo_riwayat_pesanan: String,
+        @Query("id_wo") id_wo: Int,
+    ): ArrayList<RiwayatPesananListModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerRiwayatPesananDetail(
+        @Query("get_wo_detail_riwayat_pesanan") get_wo_detail_riwayat_pesanan: String,
+        @Query("id_pemesanan") id_pemesanan: Int
+    ): ArrayList<RiwayatPesananModel>
+
+
 
     // POST
     @FormUrlEncoded
