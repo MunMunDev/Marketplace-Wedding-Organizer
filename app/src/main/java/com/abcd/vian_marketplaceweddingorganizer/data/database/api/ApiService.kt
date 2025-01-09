@@ -106,6 +106,26 @@ interface ApiService {
         @Query("id_wo") id_wo: Int
     ): ArrayList<VendorModel>
 
+    // Pesanan
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerPesananList(
+        @Query("get_wo_pesanan") get_wo_pesanan: String,
+        @Query("id_wo") id_wo: Int,
+    ): ArrayList<RiwayatPesananListModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerRiwayatPesananList(
+        @Query("get_wo_riwayat_pesanan") get_wo_riwayat_pesanan: String,
+        @Query("id_wo") id_wo: Int,
+    ): ArrayList<RiwayatPesananListModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerRiwayatPesananDetail(
+        @Query("get_wo_detail_riwayat_pesanan") get_wo_detail_riwayat_pesanan: String,
+        @Query("id_pemesanan") id_pemesanan: Int
+    ): ArrayList<RiwayatPesananModel>
+
+
 
     // POST
     @FormUrlEncoded
@@ -275,7 +295,8 @@ interface ApiService {
         @Field("detail_alamat") detail_alamat:String,
     ): ArrayList<ResponseModel>
 
-    // Post Jenis Plafon
+    // Wedding Organizer
+    // Post vendor
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postTambahVendor(
@@ -299,6 +320,13 @@ interface ApiService {
     suspend fun postDeleteVendor(
         @Field("post_wo_delete_vendor") post_wo_delete_vendor:String,
         @Field("id_vendor") id_vendor: Int
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postWeddingOrganizerKonfirmasiPembayaranSelesai(
+        @Field("post_wo_konfirmasi_pembayaran") post_wo_konfirmasi_pembayaran: String,
+        @Field("id_pemesanan") id_pemesanan: Int,
     ): ArrayList<ResponseModel>
 
 

@@ -70,7 +70,7 @@ class ChatListAdapter(
             tvInisial.text = firstLetter
 
             val listBgCircle = ArrayList<Int>()
-            listBgCircle.add(R.drawable.bg_circle)
+//            listBgCircle.add(R.drawable.bg_circle)
             listBgCircle.add(R.drawable.bg_circle_1)
             listBgCircle.add(R.drawable.bg_circle_2)
             listBgCircle.add(R.drawable.bg_circle_3)
