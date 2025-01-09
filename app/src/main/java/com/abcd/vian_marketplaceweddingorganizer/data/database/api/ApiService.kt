@@ -295,7 +295,8 @@ interface ApiService {
         @Field("detail_alamat") detail_alamat:String,
     ): ArrayList<ResponseModel>
 
-    // Post Jenis Plafon
+    // Wedding Organizer
+    // Post vendor
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postTambahVendor(
@@ -319,6 +320,13 @@ interface ApiService {
     suspend fun postDeleteVendor(
         @Field("post_wo_delete_vendor") post_wo_delete_vendor:String,
         @Field("id_vendor") id_vendor: Int
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postWeddingOrganizerKonfirmasiPembayaranSelesai(
+        @Field("post_wo_konfirmasi_pembayaran") post_wo_konfirmasi_pembayaran: String,
+        @Field("id_pemesanan") id_pemesanan: Int,
     ): ArrayList<ResponseModel>
 
 

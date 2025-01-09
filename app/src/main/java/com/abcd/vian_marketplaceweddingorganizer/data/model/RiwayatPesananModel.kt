@@ -20,6 +20,9 @@ class RiwayatPesananModel (
     @SerializedName("id_pemesanan")
     val id_pemesanan: Int? = null,
 
+    @SerializedName("nama_user")
+    val nama_user: String? = null,
+
     @SerializedName("nama_lengkap")
     val nama_lengkap: String? = null,
 
