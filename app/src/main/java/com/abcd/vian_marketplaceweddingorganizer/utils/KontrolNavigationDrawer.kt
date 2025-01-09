@@ -16,6 +16,7 @@ import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesana
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.pesanan.list.WeddingOrganizerPesananActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.riwayat_pesanan.list.WeddingOrganizerRiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.vendor.WeddingOrganizerVendorActivity
 
 class KontrolNavigationDrawer(var context: Context) {
@@ -85,9 +86,9 @@ class KontrolNavigationDrawer(var context: Context) {
                         activity.finish()
                     }
                     R.id.woNavDrawerRiwayatPesanan -> {
-//                        val intent = Intent(context, WeddingOrganizerRiwayatPesananActivity::class.java)
-//                        context.startActivity(intent)
-//                        activity.finish()
+                        val intent = Intent(context, WeddingOrganizerRiwayatPesananActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
                     }
                     R.id.woNavDrawerAkun -> {
 //                        val intent = Intent(context, WeddingOrganizerAkunActivity::class.java)
