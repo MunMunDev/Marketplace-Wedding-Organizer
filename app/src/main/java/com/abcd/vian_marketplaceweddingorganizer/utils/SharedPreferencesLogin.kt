@@ -76,7 +76,7 @@ class SharedPreferencesLogin(val context: Context) {
     fun getSebagai(): String{
         return sharedPref.getString(keySebagai, "").toString()
     }
-    fun keyDeskripsi(): String{
+    fun getDeskripsi(): String{
         return sharedPref.getString(keyDeskripsi, "").toString()
     }
     fun getLogo(): String{

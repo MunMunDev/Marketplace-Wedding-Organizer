@@ -14,6 +14,7 @@ import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActiv
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.list.RiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organizer.WeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.akun.WeddingOrganizerAkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.pesanan.list.WeddingOrganizerPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.riwayat_pesanan.list.WeddingOrganizerRiwayatPesananActivity
@@ -91,9 +92,9 @@ class KontrolNavigationDrawer(var context: Context) {
                         activity.finish()
                     }
                     R.id.woNavDrawerAkun -> {
-//                        val intent = Intent(context, WeddingOrganizerAkunActivity::class.java)
-//                        context.startActivity(intent)
-//                        activity.finish()
+                        val intent = Intent(context, WeddingOrganizerAkunActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
                     }
                     R.id.woBtnKeluar ->{
                         logout(activity)
