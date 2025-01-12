@@ -31,8 +31,8 @@ class UsersModel (
 
     // if login wo
 
-    @SerializedName("deskripsi")
-    var deskripsi: String? = null,
+    @SerializedName("deskripsi_wo")
+    var deskripsi_wo: String? = null,
 
     @SerializedName("logo_wo")
     var logo_wo: String? = null,
@@ -61,7 +61,7 @@ class UsersModel (
         parcel.writeString(password)
         parcel.writeString(sebagai)
         parcel.writeString(logo_wo)
-        parcel.writeString(deskripsi)
+        parcel.writeString(deskripsi_wo)
     }
 
     override fun describeContents(): Int {

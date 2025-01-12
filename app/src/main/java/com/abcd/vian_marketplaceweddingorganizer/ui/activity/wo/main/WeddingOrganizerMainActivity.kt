@@ -8,6 +8,7 @@ import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityWeddingOrganizerMainBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.akun.WeddingOrganizerAkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.pesanan.list.WeddingOrganizerPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.riwayat_pesanan.list.WeddingOrganizerRiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.vendor.WeddingOrganizerVendorActivity
@@ -66,7 +67,7 @@ class WeddingOrganizerMainActivity : AppCompatActivity() {
                 startActivity(Intent(this@WeddingOrganizerMainActivity, WeddingOrganizerRiwayatPesananActivity::class.java))
             }
             cvAkun.setOnClickListener {
-                startActivity(Intent(this@WeddingOrganizerMainActivity, AkunActivity::class.java))
+                startActivity(Intent(this@WeddingOrganizerMainActivity, WeddingOrganizerAkunActivity::class.java))
             }
 
         }

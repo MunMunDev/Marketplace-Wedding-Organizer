@@ -123,12 +123,12 @@ class LoginActivity : AppCompatActivity() {
         val valuePassword = userModel[0].password.toString()
         val valueSebagai= userModel[0].sebagai.toString()
         val valueLogo = userModel[0].logo_wo.toString()
-        val valueDeskripsi= userModel[0].deskripsi.toString()
+        val valueDeskripsi= userModel[0].deskripsi_wo.toString()
 
         try{
             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
             if(valueSebagai == "wo"){
-                sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai, valueLogo, valueDeskripsi)
+                sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai, valueDeskripsi, valueLogo)
                 startActivity(Intent(this@LoginActivity, WeddingOrganizerMainActivity::class.java))
             } else{
                 sharedPreferencesLogin.setLogin(valueIdUser, valueIdWO, valueNama, valueAlamat, valueNomorHp, valueUsername, valuePassword, valueSebagai, "", "")

@@ -330,6 +330,55 @@ interface ApiService {
     ): ArrayList<ResponseModel>
 
 
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdate(
+        @Field("update_akun") updateAkun:String,
+        @Field("id_user") idUser: String,
+        @Field("nama") nama:String,
+        @Field("alamat") alamat:String,
+        @Field("nomor_hp") nomorHp:String,
+        @Field("username") username:String,
+        @Field("password") password:String,
+        @Field("username_lama") usernameLama: String
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateAkunWo(
+        @Field("update_akun_wo") update_akun_wo: String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("nama") nama: String,
+        @Field("alamat") alamat: String,
+        @Field("nomor_hp") nomor_hp: String,
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("username_lama") username_lama: String,
+        @Field("sebagai") sebagai: String,
+        @Field("deskripsi") deskripsi: String,
+    ): ArrayList<ResponseModel>
+
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateAkunWoWithImage(
+        @Part("update_akun_wo_with_image") update_akun_wo_with_image: RequestBody,
+        @Part("id_user") id_user: RequestBody,
+        @Part("id_wo") id_wo: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("nomor_hp") nomor_hp: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("username_lama") username_lama: RequestBody,
+        @Part("sebagai") sebagai: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
+
+
+
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postUpdateJenisPlafon(
