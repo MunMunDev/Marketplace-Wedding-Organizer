@@ -36,16 +36,13 @@ class PaymentViewModel @Inject constructor(
     }
 
 
-    fun postRegistrasiPembayaran(
-        id_pembayaran: String, idUser: String, keterangan:String, namaLengkap: String,
-        nomorHp: String, kecamatanKabKota:String, alamat:String, detailAlamat:String
-    ){
+    fun postRegistrasiPembayaran(kodeUnik:String, idUser:Int, idWo:Int, idVendor:String, waktu:String, waktuAcacra:String){
         viewModelScope.launch(Dispatchers.IO){
             _responseRegistrasiPembayaran.postValue(UIState.Loading)
             delay(1_000)
             try {
                 val dataRegistrasiPembayaran = api.postRegistrasiPembayaran(
-                    "", id_pembayaran, idUser, keterangan, namaLengkap, nomorHp, kecamatanKabKota, alamat, detailAlamat
+                    "", kodeUnik, idUser, idWo, idVendor, waktu, waktuAcacra
                 )
                 _responseRegistrasiPembayaran.postValue(UIState.Success(dataRegistrasiPembayaran))
             } catch (ex: Exception){
@@ -54,12 +51,12 @@ class PaymentViewModel @Inject constructor(
         }
     }
 
-    fun postPesan(idUser:String, namaLengkap:String, nomorHp:String, alamat:String, detailAlamat:String, metode_pembayaran: String){
+    fun postPesanInPlace(idUser:Int, idWo:Int, idVendor:String, waktu:String, waktuAcacra:String){
         viewModelScope.launch(Dispatchers.IO) {
             _postPesan.postValue(UIState.Loading)
             delay(1_000)
             try {
-                val fetchPesanan = api.postPesan("", idUser, namaLengkap, nomorHp, alamat, detailAlamat,metode_pembayaran)
+                val fetchPesanan = api.postPesanInPlace("", idUser, idWo, idVendor, waktu, waktuAcacra)
                 _postPesan.postValue(UIState.Success(fetchPesanan))
             } catch (ex: Exception){
                 _postPesan.postValue(UIState.Failure("Gagal : ${ex.message}"))

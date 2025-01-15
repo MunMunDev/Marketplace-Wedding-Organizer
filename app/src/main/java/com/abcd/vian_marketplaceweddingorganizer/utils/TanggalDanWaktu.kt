@@ -103,6 +103,10 @@ class TanggalDanWaktu {
         return time
     }
 
+    fun tanggalDanWaktuZonaMakassar(): String{
+        return tanggalSekarangZonaMakassar()+" "+waktuSekarangZonaMakassar()
+    }
+
     fun selectedDate(tanggal:String, tv: TextView, context: Context){
         var arrayTanggalSekarang = tanggal.split("-")
 

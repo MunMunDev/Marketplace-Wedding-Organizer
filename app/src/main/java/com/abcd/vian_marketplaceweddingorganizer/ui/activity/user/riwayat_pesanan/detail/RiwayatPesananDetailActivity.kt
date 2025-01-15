@@ -145,6 +145,14 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
             binding.btnTestimoni.visibility = View.VISIBLE
             binding.btnKonfirmasiPesanan.visibility = View.GONE
         }
+
+        val bayar = data[0].ket!!
+        if(bayar == "0"){
+            binding.btnKonfirmasiPesanan.visibility = View.GONE
+        } else{
+            binding.btnKonfirmasiPesanan.visibility = View.VISIBLE
+        }
+
         binding.apply {
             tvTotalHarga.text = rupiah.rupiah(totalHarga.toLong())
             tvMetodePembayaran.text = metodePembayaran

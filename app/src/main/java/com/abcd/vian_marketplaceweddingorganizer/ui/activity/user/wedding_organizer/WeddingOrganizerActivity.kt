@@ -96,7 +96,8 @@ class WeddingOrganizerActivity : AppCompatActivity() {
         plafonAdapter = WeddingOrganizerAdapter(data, object : OnClickItem.ClickWeddingOrganizer{
             override fun clickWeddingOrganizer(weddingOrganizer: WeddingOrganizerModel) {
                 val i = Intent(this@WeddingOrganizerActivity, WeddingOrganizerDetailActivity::class.java)
-                i.putExtra("idWeddingOrganizer", weddingOrganizer.id_user)
+                i.putExtra("idWeddingOrganizer", weddingOrganizer.id_wo)
+                i.putExtra("idUserWeddingOrganizer", weddingOrganizer.id_user)
                 i.putExtra("nama", weddingOrganizer.nama)
                 i.putExtra("deskripsi", weddingOrganizer.deskripsi_wo)
                 i.putExtra("alamat", weddingOrganizer.alamat)

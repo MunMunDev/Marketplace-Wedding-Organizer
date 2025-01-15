@@ -63,13 +63,17 @@ class PaymentActivity : AppCompatActivity() {
 
     private lateinit var vendor: ArrayList<VendorModel>
     private var namaWeddingOrganizer = ""
-    private var idUser = ""
+    private var idUser = 0
     private var namaLengkap = ""
     private var nomorHp = ""
     private var kecamatanKabKota = ""
     private var alamat = ""
     private var detailAlamat = ""
     private var jenisPembayaran = ""
+
+    private var idWo = 0
+    private var idVendor = ""
+    private var waktuAcara = ""
 
     private var selectedValue = ""
     private var numberPosition = 0
@@ -83,9 +87,10 @@ class PaymentActivity : AppCompatActivity() {
         fetchDataSebelumnya()
         setAppNavbarDrawer()
         setButton()
-        konfigurationMidtrans()
+        setSpinnerMetodePembayaran()
         fetchAlamat(sharedPreferencesLogin.getIdUser())
         getAlamat()
+        konfigurationMidtrans()
         getDataRegistrasiPembayaran()
         getTambahPesananDitempat()
     }
@@ -96,11 +101,15 @@ class PaymentActivity : AppCompatActivity() {
             vendor = arrayListOf()
             vendor = intent.getParcelableArrayListExtra("vendor")!!
             namaWeddingOrganizer = intent.getStringExtra("nama_wedding_organizer")!!
+            idWo = intent.getIntExtra("idWo", 0)
 
             if(vendor.isNotEmpty()){
                 setVendor(vendor)
             } else{
                 Toast.makeText(this@PaymentActivity, "Vendor kosong", Toast.LENGTH_SHORT).show()
+            }
+            for(values in vendor){
+                idVendor+="${values.id_vendor};;;"
             }
         }
         binding.tvTanggalAcara.text = "${tanggalDanWaktu.tanggalSekarangZonaMakassar()} 10:00"
@@ -115,6 +124,7 @@ class PaymentActivity : AppCompatActivity() {
     }
     private fun setSharedPreferencesLogin() {
         sharedPreferencesLogin = SharedPreferencesLogin(this@PaymentActivity)
+        idUser = sharedPreferencesLogin.getIdUser()
     }
 
     private fun setButton() {
@@ -131,9 +141,9 @@ class PaymentActivity : AppCompatActivity() {
                 } else{
                     if(numberPosition == 0){
 //                        fetchDataRegistrasiPembayaran(uuid, idUser)
-                        postDataRegistrasiPembayaran(acak, idUser, namaLengkap, nomorHp, kecamatanKabKota, alamat, detailAlamat)
+                        postDataRegistrasiPembayaran(acak, idUser, idWo, idVendor, tanggalDanWaktu.tanggalDanWaktuZonaMakassar(), tvTanggalAcara.text.toString().trim())
                     } else{
-                        postTambahPesananDitempat(idUser, namaLengkap, nomorHp, alamat, detailAlamat, jenisPembayaran)
+                        postTambahPesananDitempat(idUser, idWo, idVendor, tanggalDanWaktu.tanggalDanWaktuZonaMakassar(), tvTanggalAcara.text.toString().trim())
                     }
                 }
             }
@@ -152,6 +162,37 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
+    private fun setSpinnerMetodePembayaran(){
+        binding.apply {
+            // Spinner Metode Pembayaran
+            val arrayAdapter = ArrayAdapter.createFromResource(
+                this@PaymentActivity,
+                R.array.metode_pembayaran,
+                android.R.layout.simple_spinner_item
+            )
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spMetodePembayaran.adapter = arrayAdapter
+
+            spMetodePembayaran.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    numberPosition = spMetodePembayaran.selectedItemPosition
+                    selectedValue = spMetodePembayaran.selectedItem.toString()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+
+            spMetodePembayaran.adapter = arrayAdapter
+        }
+    }
+
     private fun fetchAlamat(idUser: Int){
         viewModel.fetchAlamat(idUser)
     }
@@ -159,19 +200,22 @@ class PaymentActivity : AppCompatActivity() {
     private fun getAlamat(){
         viewModel.getAlamat().observe(this@PaymentActivity){result->
             when(result){
-                is UIState.Loading->{}
+                is UIState.Loading->setStartShimmer()
                 is UIState.Success->setSuccessFetchAlamat(result.data)
                 is UIState.Failure->setFailureFetchAlamat(result.message)
+                else -> {}
             }
         }
     }
 
     private fun setFailureFetchAlamat(message: String) {
         Toast.makeText(this@PaymentActivity, "alamat: $message", Toast.LENGTH_SHORT).show()
+        setStopShimmer()
     }
 
     private fun setSuccessFetchAlamat(data: ArrayList<AlamatModel>) {
         setAlamat(data)
+        setStopShimmer()
     }
 
     private fun setVendor(data: ArrayList<VendorModel>) {
@@ -194,9 +238,7 @@ class PaymentActivity : AppCompatActivity() {
 
                 itemDetails.add(
                     ItemDetails(
-//                        "$no", 12.0, 1, " m2 X m2)"
-//                        "$no", totalHargaSatuan, jumlah.toInt(), "$jenisPlafon"
-                        "$no", totalHarga, 1, "$namaVendor"
+                        "$no", harga.toDouble(), 1, "$namaVendor"
                     )
                 )
                 no++
@@ -220,6 +262,7 @@ class PaymentActivity : AppCompatActivity() {
             finish()
         }
     }
+
 
     private fun setAlamat(data: ArrayList<AlamatModel>) {
         binding.apply {
@@ -257,32 +300,7 @@ class PaymentActivity : AppCompatActivity() {
             alamat = alamatModel.alamat!!
             detailAlamat = alamatModel.detail_alamat!!
 
-            // Spinner Metode Pembayaran
-            val arrayAdapter = ArrayAdapter.createFromResource(
-                this@PaymentActivity,
-                R.array.metode_pembayaran,
-                android.R.layout.simple_spinner_item
-            )
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spMetodePembayaran.adapter = arrayAdapter
-
-            spMetodePembayaran.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    numberPosition = spMetodePembayaran.selectedItemPosition
-                    selectedValue = spMetodePembayaran.selectedItem.toString()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-            }
-
-            spMetodePembayaran.adapter = arrayAdapter
+            setCustomerDetails()
         }
     }
 
@@ -295,11 +313,14 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun postDataRegistrasiPembayaran(
-        idPembayaran: String, idUser: String,
-        namaLengkap: String, nomorHp: String,
-        kecamatanKabKota: String, alamat: String, detailAlamat: String
+        kodeUnik: String,
+        idUser: Int,
+        idWo: Int,
+        idVendor: String,
+        waktu: String,
+        waktuAcara: String,
     ) {
-        viewModel.postRegistrasiPembayaran(idPembayaran, idUser, "Pending", namaLengkap, nomorHp, kecamatanKabKota, alamat, detailAlamat)
+        viewModel.postRegistrasiPembayaran(kodeUnik, idUser, idWo, idVendor, waktu, waktuAcara)
     }
 
     private fun getDataRegistrasiPembayaran() {
@@ -338,14 +359,13 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun postTambahPesananDitempat(
-        idUser: String,
-        namaLengkap: String,
-        nomorHp: String,
-        alamat: String,
-        detailAlamat: String,
-        jenisPembayaran: String
+        idUser: Int,
+        idWo: Int,
+        idVendor: String,
+        waktu: String,
+        waktuAcara: String,
     ) {
-        viewModel.postPesan(idUser, namaLengkap, nomorHp, alamat, detailAlamat, jenisPembayaran)
+        viewModel.postPesanInPlace(idUser, idWo, idVendor, waktu, waktuAcara)
     }
     private fun getTambahPesananDitempat(){
         viewModel.getPostPesan().observe(this@PaymentActivity){result->
@@ -426,6 +446,7 @@ class PaymentActivity : AppCompatActivity() {
         if(nomorHp == ""){
             nomorHp = "0"
         }
+
         customerDetails = CustomerDetails(
             firstName = namaLengkap,
             customerIdentifier = "${sharedPreferencesLogin.getIdUser()}",
@@ -456,27 +477,36 @@ class PaymentActivity : AppCompatActivity() {
                 loading.alertDialogLoading(this@PaymentActivity)
                 when (transactionResult.status) {
                     UiKitConstants.STATUS_SUCCESS -> {
-//                        Toast.makeText(this, "Transaction Finished. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        loading.alertDialogCancel()
+                        Toast.makeText(this, "Transaction Finished. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
 //                        fetchDataPembayaran(idUser)
                     }
                     UiKitConstants.STATUS_PENDING -> {
-//                        Toast.makeText(this, "Transaction Pending. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        loading.alertDialogCancel()
+                        Toast.makeText(this, "Transaction Pending. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        acak = kataAcak.getHurufDanAngka()
 //                        fetchDataPembayaran(idUser)
                     }
                     UiKitConstants.STATUS_FAILED -> {
-//                        Toast.makeText(this, "Transaction Failed. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        loading.alertDialogCancel()
+                        Toast.makeText(this, "Transaction Failed. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        acak = kataAcak.getHurufDanAngka()
 //                        fetchDataPembayaran(idUser)
                     }
                     UiKitConstants.STATUS_CANCELED -> {
-//                        Toast.makeText(this, "Transaction Cancelled", Toast.LENGTH_LONG).show()
+                        loading.alertDialogCancel()
+                        Toast.makeText(this, "Transaction Cancelled", Toast.LENGTH_LONG).show()
+                        acak = kataAcak.getHurufDanAngka()
 //                        fetchDataPembayaran(idUser)
                     }
                     UiKitConstants.STATUS_INVALID -> {
-//                        Toast.makeText(this, "Transaction Invalid. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        loading.alertDialogCancel()
+                        Toast.makeText(this, "Transaction Invalid. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
 //                        fetchDataPembayaran(idUser)
                     }
                     else -> {
-//                        Toast.makeText(this, "Transaction ID: " + transactionResult.transactionId + ". Message: " + transactionResult.status, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Transaction ID: " + transactionResult.transactionId + ". Message: " + transactionResult.status, Toast.LENGTH_LONG).show()
+                        loading.alertDialogCancel()
 //                        fetchDataPembayaran(idUser)
                     }
                 }
@@ -493,6 +523,25 @@ class PaymentActivity : AppCompatActivity() {
             binding.tvTanggalAcara,
             this@PaymentActivity
         )
+    }
+
+    private fun setStartShimmer(){
+        binding.apply {
+            smAlamat.startShimmer()
+            smAlamat.visibility = View.VISIBLE
+
+            clAlamatDetail.visibility = View.GONE
+        }
+    }
+
+    private fun setStopShimmer(){
+        binding.apply {
+            smAlamat.stopShimmer()
+            clAlamatDetail.visibility = View.VISIBLE
+
+            smAlamat.visibility = View.GONE
+
+        }
     }
 
     override fun onBackPressed() {
