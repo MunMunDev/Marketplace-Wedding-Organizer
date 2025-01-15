@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivitySplashScreenBinding
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.AdminMainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
@@ -38,8 +39,8 @@ class SplashScreenActivity : AppCompatActivity() {
                     startActivity(Intent(this@SplashScreenActivity, WeddingOrganizerMainActivity::class.java))
                     finish()
                 } else if(sharedPreferencesLogin.getSebagai() == "admin"){
-//                    startActivity(Intent(this@SplashScreenActivity, AdminMainActivity::class.java))
-//                    finish()
+                    startActivity(Intent(this@SplashScreenActivity, AdminMainActivity::class.java))
+                    finish()
                 }
             }
         }, 3000)
