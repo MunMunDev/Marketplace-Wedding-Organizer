@@ -271,28 +271,25 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
-    suspend fun postPesan(
-        @Field("post_pesan") postPesan:String,
-        @Field("id_user") id_user: String,
-        @Field("nama_lengkap") nama_lengkap: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("alamat") alamat: String,
-        @Field("detail_alamat") detail_alamat: String,
-        @Field("metode_pembayaran") metode_pembayaran: String
+    suspend fun postPesanInPlace(
+        @Field("post_pesan_ditempat") post_pesan_ditempat:String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("id_vendor") id_vendor: String,
+        @Field("waktu") waktu: String,
+        @Field("waktu_acara") waktu_acara: String,
     ): ArrayList<ResponseModel>
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postRegistrasiPembayaran(
-        @Field("registrasi_pembayaran") registrasiPembayaran:String,
-        @Field("id_pembayaran") id_pembayaran:String,
-        @Field("id_user") id_user:String,
-        @Field("keterangan") keterangan:String,
-        @Field("nama_lengkap") nama_lengkap:String,
-        @Field("nomor_hp") nomor_hp:String,
-        @Field("kecamatan_kab_kota") kecamatan_kab_kota:String,
-        @Field("alamat") alamat:String,
-        @Field("detail_alamat") detail_alamat:String,
+        @Field("post_register_pembayaran") post_register_pembayaran:String,
+        @Field("kode_unik") kode_unik: String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("id_vendor") id_vendor: String,
+        @Field("waktu") waktu: String,
+        @Field("waktu_acara") waktu_acara: String,
     ): ArrayList<ResponseModel>
 
     // Wedding Organizer

@@ -41,6 +41,7 @@ import javax.inject.Inject
 class WeddingOrganizerDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWeddingOrganizerDetailBinding
     private var idWeddingOrganizer: Int = 0
+    private var idUserWeddingOrganizer: Int = 0
     private var namaWeddingOrganizer: String = ""
     private var alamat: String = ""
     private var deskripsi: String = ""
@@ -73,6 +74,7 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
         if(extras != null) {
 
             idWeddingOrganizer = intent.getIntExtra("idWeddingOrganizer", 0)
+            idUserWeddingOrganizer = intent.getIntExtra("idUserWeddingOrganizer", 0)
             namaWeddingOrganizer = intent.getStringExtra("nama")!!
             alamat = intent.getStringExtra("alamat")!!
             deskripsi = intent.getStringExtra("deskripsi")!!
@@ -159,7 +161,7 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
             }
             btnChatWO.setOnClickListener {
                 val i = Intent(this@WeddingOrganizerDetailActivity, ChatWeddingOrganizerActivity::class.java)
-                i.putExtra("id_received", idWeddingOrganizer)
+                i.putExtra("id_received", idUserWeddingOrganizer)
                 i.putExtra("nama_wedding_organizer", namaWeddingOrganizer)
                 startActivity(i)
             }
@@ -212,6 +214,7 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
                     val i = Intent(this@WeddingOrganizerDetailActivity, PaymentActivity::class.java)
                     i.putParcelableArrayListExtra("vendor", listChooseVendor)
                     i.putExtra("nama_wedding_organizer", namaWeddingOrganizer)
+                    i.putExtra("idWo", idWeddingOrganizer)
                     startActivity(i)
                 } else{
                     Toast.makeText(this@WeddingOrganizerDetailActivity, "Kosong", Toast.LENGTH_SHORT).show()
