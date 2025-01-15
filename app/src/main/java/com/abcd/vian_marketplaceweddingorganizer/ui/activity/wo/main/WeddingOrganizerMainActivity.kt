@@ -40,7 +40,7 @@ class WeddingOrganizerMainActivity : AppCompatActivity() {
             ivNavDrawer.visibility = View.VISIBLE
 
 //            tvTitle.text = "Halaman Wedding Organizer"
-            tvTitle.text = sharedPreferencesLogin.getNama()
+            tvTitle.text = "Admin"
         }
     }
 
