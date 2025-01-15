@@ -502,6 +502,7 @@ class PaymentActivity : AppCompatActivity() {
                     UiKitConstants.STATUS_INVALID -> {
                         loading.alertDialogCancel()
                         Toast.makeText(this, "Transaction Invalid. ID: " + transactionResult.transactionId, Toast.LENGTH_LONG).show()
+                        acak = kataAcak.getHurufDanAngka()
 //                        fetchDataPembayaran(idUser)
                     }
                     else -> {
