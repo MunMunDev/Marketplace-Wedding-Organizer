@@ -59,4 +59,13 @@ interface OnClickItem {
         fun clickItemVendor(vendor: VendorModel, it: View)
         fun clickItemSetting(vendor: VendorModel, it: View)
     }
+
+    interface ClickAdminWeddingOrganizer{
+        fun clickItemNama(title:String, nama: String)
+        fun clickItemAlamat(title:String, alamat: String)
+        fun clickItemUsername(title:String, username: String)
+        fun clickItemDeskripsi(title:String, deskripsi: String)
+        fun clickItemGambar(title:String, gambar: String)
+        fun clickItemSetting(wo: UsersModel, it: View)
+    }
 }

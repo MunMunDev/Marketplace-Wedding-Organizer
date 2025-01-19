@@ -126,6 +126,14 @@ interface ApiService {
     ): ArrayList<RiwayatPesananModel>
 
 
+    // Admin
+    // Akun
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getAkunWeddingOrganizer(
+        @Query("get_admin_akun_wedding_organizer") get_admin_akun_wedding_organizer: String
+    ): ArrayList<UsersModel>
+
+
 
     // POST
     @FormUrlEncoded
@@ -354,7 +362,7 @@ interface ApiService {
         @Field("password") password: String,
         @Field("username_lama") username_lama: String,
         @Field("sebagai") sebagai: String,
-        @Field("deskripsi") deskripsi: String,
+        @Field("deskripsi_wo") deskripsi_wo: String,
     ): ArrayList<ResponseModel>
 
     @Multipart
@@ -370,7 +378,59 @@ interface ApiService {
         @Part("password") password: RequestBody,
         @Part("username_lama") username_lama: RequestBody,
         @Part("sebagai") sebagai: RequestBody,
+        @Part("deskripsi_wo") deskripsi: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
+
+
+    // Admin
+    // Akun Wedding Organizer
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postTambahAkunWoWithImage(
+        @Part("tambah_akun_wo_with_image") tambah_akun_wo_with_image: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("nomor_hp") nomor_hp: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("sebagai") sebagai: RequestBody,
         @Part("deskripsi") deskripsi: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
+
+
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateAdminAkunWo(
+        @Field("update_admin_akun_wo") update_admin_akun_wo: String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("nama") nama: String,
+        @Field("alamat") alamat: String,
+        @Field("nomor_hp") nomor_hp: String,
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("username_lama") username_lama: String,
+        @Field("sebagai") sebagai: String,
+        @Field("deskripsi_wo") deskripsi_wo: String,
+    ): ArrayList<ResponseModel>
+
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateAdminAkunWoWithImage(
+        @Part("update_admin_akun_wo_with_image") update_admin_akun_wo_with_image: RequestBody,
+        @Part("id_user") id_user: RequestBody,
+        @Part("id_wo") id_wo: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("nomor_hp") nomor_hp: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("username_lama") username_lama: RequestBody,
+        @Part("sebagai") sebagai: RequestBody,
+        @Part("deskripsi_wo") deskripsi: RequestBody,
         @Part gambar: MultipartBody.Part,
     ): ArrayList<ResponseModel>
 
