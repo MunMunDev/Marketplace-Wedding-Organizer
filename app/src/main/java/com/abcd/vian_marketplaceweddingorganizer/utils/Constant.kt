@@ -1,7 +1,7 @@
 package com.abcd.vian_marketplaceweddingorganizer.utils
 
 object Constant {
-    //    const val BASE_URL = "https://e-portofolio.web.id/"
+//    const val BASE_URL = "https://e-portofolio.web.id/"
     const val BASE_URL = "http://192.168.17.5/"
     const val LOCATION_GAMBAR = "marketplace-wo/gambar/"
 

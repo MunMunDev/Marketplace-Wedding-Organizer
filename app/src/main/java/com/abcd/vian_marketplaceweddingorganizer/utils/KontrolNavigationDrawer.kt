@@ -9,6 +9,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.R
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.AdminMainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.wedding_organizer.AdminWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity
@@ -104,7 +106,22 @@ class KontrolNavigationDrawer(var context: Context) {
             else if(sharedPreferences.getSebagai() == "admin"){
                 when(it.itemId){
                     R.id.adminNavDrawerHome -> {
-//                        val intent = Intent(context, AdminMainActivity::class.java)
+                        val intent = Intent(context, AdminMainActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.adminNavDrawerAkunWo -> {
+                        val intent = Intent(context, AdminWeddingOrganizerActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.adminNavDrawerAkunUser -> {
+//                        val intent = Intent(context, AdminUserActivity::class.java)
+//                        context.startActivity(intent)
+//                        activity.finish()
+                    }
+                    R.id.adminNavDrawerTestimoni -> {
+//                        val intent = Intent(context, AdminTestimoniActivity::class.java)
 //                        context.startActivity(intent)
 //                        activity.finish()
                     }
