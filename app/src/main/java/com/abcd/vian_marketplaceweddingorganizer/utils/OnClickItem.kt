@@ -68,4 +68,11 @@ interface OnClickItem {
         fun clickItemGambar(title:String, gambar: String)
         fun clickItemSetting(wo: UsersModel, it: View)
     }
+
+    interface ClickAdminUser{
+        fun clickItemNama(title:String, nama: String)
+        fun clickItemAlamat(title:String, alamat: String)
+        fun clickItemUsername(title:String, username: String)
+        fun clickItemSetting(wo: UsersModel, it: View)
+    }
 }
