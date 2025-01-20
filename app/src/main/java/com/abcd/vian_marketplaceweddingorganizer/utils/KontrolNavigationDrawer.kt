@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.AdminMainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.user.AdminUserActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.wedding_organizer.AdminWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
@@ -116,9 +117,9 @@ class KontrolNavigationDrawer(var context: Context) {
                         activity.finish()
                     }
                     R.id.adminNavDrawerAkunUser -> {
-//                        val intent = Intent(context, AdminUserActivity::class.java)
-//                        context.startActivity(intent)
-//                        activity.finish()
+                        val intent = Intent(context, AdminUserActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
                     }
                     R.id.adminNavDrawerTestimoni -> {
 //                        val intent = Intent(context, AdminTestimoniActivity::class.java)

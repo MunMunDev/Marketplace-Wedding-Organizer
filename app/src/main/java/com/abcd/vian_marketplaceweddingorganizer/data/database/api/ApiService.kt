@@ -434,6 +434,20 @@ interface ApiService {
         @Part gambar: MultipartBody.Part,
     ): ArrayList<ResponseModel>
 
+    // User
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateAdminAkunUser(
+        @Field("update_admin_akun_user") update_admin_akun_user: String,
+        @Field("id_user") id_user: Int,
+        @Field("nama") nama: String,
+        @Field("alamat") alamat: String,
+        @Field("nomor_hp") nomor_hp: String,
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("username_lama") username_lama: String,
+    ): ArrayList<ResponseModel>
+
 
 
     @FormUrlEncoded

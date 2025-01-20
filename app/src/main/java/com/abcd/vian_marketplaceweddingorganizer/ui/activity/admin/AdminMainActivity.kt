@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityAdminMainBinding
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.user.AdminUserActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.wedding_organizer.AdminWeddingOrganizerActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
@@ -52,7 +53,7 @@ class AdminMainActivity : AppCompatActivity() {
                 startActivity(Intent(this@AdminMainActivity, AdminWeddingOrganizerActivity::class.java))
             }
             cvAkunUser.setOnClickListener {
-//                startActivity(Intent(this@AdminMainActivity, AdminAkunUserActivity::class.java))
+                startActivity(Intent(this@AdminMainActivity, AdminUserActivity::class.java))
             }
             cvTestimoni.setOnClickListener {
 //                startActivity(Intent(this@AdminMainActivity, AdminTestimoniActivity::class.java))
