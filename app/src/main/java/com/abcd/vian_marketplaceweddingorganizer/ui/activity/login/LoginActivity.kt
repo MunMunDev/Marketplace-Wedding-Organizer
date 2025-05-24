@@ -61,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         loginBinding.apply {
             btnLogin.setOnClickListener{
                 if(etUsername.text.isNotEmpty() && etPassword.text.isNotEmpty()){
-                    loading.alertDialogLoading(this@LoginActivity)
                     cekUsers(etUsername.text.toString(), etPassword.text.toString())
                 }
                 else{
@@ -111,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun successFetchLogin(userModel: ArrayList<UsersModel>){
-        loading.alertDialogCancel()
+//        loading.alertDialogCancel()
         var valueIdUser = 0
         userModel[0].idUser?.let {
             valueIdUser = it.toInt()

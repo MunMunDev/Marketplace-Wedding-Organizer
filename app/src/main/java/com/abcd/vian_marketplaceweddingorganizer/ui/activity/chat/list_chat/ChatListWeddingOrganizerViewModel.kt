@@ -20,12 +20,16 @@ class ChatListWeddingOrganizerViewModel @Inject constructor(
     private val api: ApiService
 ): ViewModel() {
     val _lisMessage = MutableLiveData<UIState<ArrayList<MessageModel>>>()
-    fun fetchChatListWeddingOrganizer(idUser:Int){
+    fun fetchChatListWeddingOrganizer(idUser:Int, sebagai: String){
         viewModelScope.launch(Dispatchers.IO) {
             _lisMessage.postValue(UIState.Loading)
             delay(1_000)
             try {
-                val dataPembayaran = api.getChatListWeddingOrganizer("", idUser)
+                val dataPembayaran = if(sebagai == "user"){
+                    api.getChatListWeddingOrganizer("", idUser)
+                } else{
+                    api.getChatListWoWeddingOrganizer("", idUser)
+                }
                 _lisMessage.postValue(UIState.Success(dataPembayaran))
             } catch (ex: Exception){
                 _lisMessage.postValue(UIState.Failure("Error pada: ${ex.message}"))

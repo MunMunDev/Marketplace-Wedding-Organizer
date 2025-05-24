@@ -22,6 +22,12 @@ interface OnClickItem {
 //            namaWO: String, logo: String
 //        )
     }
+    interface ClickPaketWeddingOrganizer{
+        fun clickPaketWeddingOrganizer(
+            vendor: ArrayList<VendorModel>
+        )
+    }
+
     interface ClickChooseVendorWeddingOrganizer{
         fun clickChooseVendorWeddingOrganizer(
             check:Boolean, position:Int, vendor: VendorModel
