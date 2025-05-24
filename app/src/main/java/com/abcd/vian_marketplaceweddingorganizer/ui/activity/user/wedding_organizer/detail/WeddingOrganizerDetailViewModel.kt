@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.abcd.vian_marketplaceweddingorganizer.adapter.PaketVendorAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.database.api.ApiService
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
@@ -17,8 +19,27 @@ import javax.inject.Inject
 class WeddingOrganizerDetailViewModel @Inject constructor(
     private val api: ApiService
 ): ViewModel() {
+    private var _fetchPaketVendor = MutableLiveData<UIState<ArrayList<PaketModel>>>()
     private var _fetchTestimoni = MutableLiveData<UIState<ArrayList<TestimoniModel>>>()
     private var _postTambahPesanan = MutableLiveData<UIState<ArrayList<ResponseModel>>>()
+
+    fun fetchPaketVendor(
+        idWeddingOrganizer: Int
+    ){
+        viewModelScope.launch {
+            _fetchPaketVendor.postValue(UIState.Loading)
+            delay(1_000)
+            try {
+                val data = api.getPaketVendor(
+                    "", idWeddingOrganizer
+                )
+                _fetchPaketVendor.postValue(UIState.Success(data))
+            } catch (ex: Exception){
+                _fetchPaketVendor.postValue(UIState.Failure("Error: ${ex.message}"))
+            }
+        }
+    }
+
     fun fetchTestimoni(
         idWeddingOrganizer: Int
     ){
@@ -54,5 +75,6 @@ class WeddingOrganizerDetailViewModel @Inject constructor(
     }
 
     fun getTestimoni(): LiveData<UIState<ArrayList<TestimoniModel>>> = _fetchTestimoni
+    fun getPaketVendor(): LiveData<UIState<ArrayList<PaketModel>>> = _fetchPaketVendor
     fun getTambahPesanan(): LiveData<UIState<ArrayList<ResponseModel>>> = _postTambahPesanan
 }

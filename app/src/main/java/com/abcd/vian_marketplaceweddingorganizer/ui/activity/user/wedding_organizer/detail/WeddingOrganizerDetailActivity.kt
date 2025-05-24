@@ -16,8 +16,11 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abcd.vian_marketplaceweddingorganizer.R
+import com.abcd.vian_marketplaceweddingorganizer.adapter.PaketVendorAdapter
 import com.abcd.vian_marketplaceweddingorganizer.adapter.TestimoniAdapter
 import com.abcd.vian_marketplaceweddingorganizer.adapter.VendorWeddingOrganizerDetailAdapter
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketVendorModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
@@ -64,8 +67,27 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
         fetchDataSebelumnya()
         setAppBarNavbar()
         getVendor()
+        getPaketVendor()
         getTestimoni()
         getTambahPesanan()
+        setCollapse()
+    }
+
+    var cekCollapse = false
+    private fun setCollapse() {
+        binding.apply{
+            tvCollapseDeskripsi.setOnClickListener {
+                if(cekCollapse){
+                    tvCollapseDeskripsi.text = "Lebih Banyak"
+                    tvDeskripsi.maxLines = 4
+                    cekCollapse = false
+                } else{
+                    tvCollapseDeskripsi.text = "Lebih Sedikit"
+                    tvDeskripsi.maxLines = Integer.MAX_VALUE
+                    cekCollapse = true
+                }
+            }
+        }
     }
 
     private fun fetchDataSebelumnya() {
@@ -94,6 +116,7 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
             }
 
             fetchTestimoni(idWeddingOrganizer)
+            fetchPaketVendor(idWeddingOrganizer)
         }
     }
 
@@ -105,6 +128,54 @@ class WeddingOrganizerDetailActivity : AppCompatActivity() {
             ivBack.setOnClickListener {
                 finish()
             }
+        }
+    }
+
+    private fun fetchPaketVendor(idWeddingOrganizer: Int){
+        viewModel.fetchPaketVendor(idWeddingOrganizer)
+    }
+
+    private fun getPaketVendor(){
+        viewModel.getPaketVendor().observe(this@WeddingOrganizerDetailActivity){result->
+            when(result){
+                is UIState.Loading->{}
+                is UIState.Failure-> setFailureFetchPaketVendor(result.message)
+                is UIState.Success-> setSuccessFetchPaketVendor(result.data)
+            }
+        }
+    }
+
+    private fun setSuccessFetchPaketVendor(data: ArrayList<PaketModel>) {
+        if(data.isNotEmpty()){
+            val adapter = PaketVendorAdapter(data, object: OnClickItem.ClickPaketWeddingOrganizer{
+                override fun clickPaketWeddingOrganizer(vendor: ArrayList<VendorModel>) {
+                    val i = Intent(this@WeddingOrganizerDetailActivity, PaymentActivity::class.java)
+                    i.putParcelableArrayListExtra("vendor", vendor)
+                    i.putExtra("nama_wedding_organizer", namaWeddingOrganizer)
+                    i.putExtra("idWo", idWeddingOrganizer)
+                    startActivity(i)
+                }
+            })
+            binding.apply {
+                tvTitlePaket.visibility = View.VISIBLE
+                rvPaket.visibility = View.VISIBLE
+
+                rvPaket.layoutManager = LinearLayoutManager(this@WeddingOrganizerDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+                rvPaket.adapter = adapter
+            }
+        } else{
+            binding.apply {
+                tvTitlePaket.visibility = View.GONE
+                rvPaket.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setFailureFetchPaketVendor(message: String) {
+        Log.d("DetailTAG", "setFailureFetchPaketVendor: $message")
+        binding.apply {
+            tvTitlePaket.visibility = View.GONE
+            rvPaket.visibility = View.GONE
         }
     }
 

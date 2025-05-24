@@ -33,7 +33,7 @@ class ChatListWeddingOrganizerActivity : AppCompatActivity() {
 
         setConfiguration()
         setButton()
-        fetchChatListWeddingOrganizer(sharedPref.getIdUser())
+        fetchChatListWeddingOrganizer(sharedPref.getIdUser(), sharedPref.getSebagai())
         getChatListWeddingOrganizer()
     }
 
@@ -74,8 +74,8 @@ class ChatListWeddingOrganizerActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchChatListWeddingOrganizer(idUser:Int){
-        viewModel.fetchChatListWeddingOrganizer(idUser)
+    private fun fetchChatListWeddingOrganizer(idUser:Int, sebagai: String){
+        viewModel.fetchChatListWeddingOrganizer(idUser, sebagai)
     }
 
     private fun getChatListWeddingOrganizer(){

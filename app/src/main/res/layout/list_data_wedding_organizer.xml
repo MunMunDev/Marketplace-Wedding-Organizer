@@ -57,7 +57,7 @@
                 android:layout_marginTop="6dp"
                 android:maxLines="1"
                 android:text="Alamat : "
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/abuabu_tua"
                 android:elevation="20dp"/>
 
@@ -72,7 +72,7 @@
                 android:layout_marginBottom="2dp"
                 android:maxLines="2"
                 android:text="Alamat"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/abuabu_tua"
                 android:elevation="20dp"/>
 
@@ -80,12 +80,12 @@
                 android:id="@+id/tvTitleVendor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleAlamat"
+                app:layout_constraintTop_toBottomOf="@id/tvAlamat"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="2dp"
                 android:maxLines="1"
                 android:text="Vendor : "
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/abuabu_tua"
                 android:elevation="20dp"/>
 
@@ -100,7 +100,7 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:text="Vendor, vendor, Vendor, vendor, Vendor, vendor"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/abuabu_tua"
                 android:elevation="20dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

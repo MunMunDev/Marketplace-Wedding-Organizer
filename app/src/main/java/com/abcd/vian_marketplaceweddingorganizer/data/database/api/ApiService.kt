@@ -3,6 +3,8 @@ package com.abcd.vian_marketplaceweddingorganizer.data.database.api
 import com.abcd.vian_marketplaceweddingorganizer.data.model.AlamatModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.KabKotaModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketVendorModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
@@ -68,11 +70,23 @@ interface ApiService {
     ): ArrayList<MessageModel>
 
     @GET("marketplace-wo/api/get.php")
+    suspend fun getChatListWoWeddingOrganizer(
+        @Query("get_list_chat_wo") get_list_chat_wo: String,
+        @Query("id_pengirim") id_pengirim: Int,
+    ): ArrayList<MessageModel>
+
+    @GET("marketplace-wo/api/get.php")
     suspend fun getChatWeddingOrganizer(
         @Query("get_chat_wedding_organizer") get_chat_wedding_organizer: String,
         @Query("id_pengirim") id_pengirim: Int,
         @Query("id_penerima") id_penerima: Int,
     ): ArrayList<MessageModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getPaketVendor(
+        @Query("get_paket_vendor") get_paket_vendor: String,
+        @Query("id_wo") id_wo: Int
+    ): ArrayList<PaketModel>
 
     @GET("marketplace-wo/api/get.php")
     suspend fun getTestimoni(
