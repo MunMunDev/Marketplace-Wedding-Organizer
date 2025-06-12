@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abcd.vian_marketplaceweddingorganizer.data.database.api.ApiService
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RekeningModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
@@ -13,6 +14,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,8 +24,10 @@ class RiwayatPesananDetailViewModel @Inject constructor(
 ): ViewModel() {
     private var _fetchTestimoni = MutableLiveData<UIState<ArrayList<TestimoniModel>>>()
     val _detailRiwayatPesanan = MutableLiveData<UIState<ArrayList<RiwayatPesananModel>>>()
+    val _rekening = MutableLiveData<UIState<ArrayList<RekeningModel>>>()
     private val _postTambahTestimoni = MutableLiveData<UIState<ArrayList<ResponseModel>>>()
     private val _postUpdateTestimoni = MutableLiveData<UIState<ArrayList<ResponseModel>>>()
+    private val _postBuktiPembayaran = MutableLiveData<UIState<ArrayList<ResponseModel>>>()
 
     fun fetchTestimoni(
         idPemesanan: Int
@@ -50,6 +55,19 @@ class RiwayatPesananDetailViewModel @Inject constructor(
                 _detailRiwayatPesanan.postValue(UIState.Success(dataPembayaran))
             } catch (ex: Exception) {
                 _detailRiwayatPesanan.postValue(UIState.Failure("Error pada: ${ex.message}"))
+            }
+        }
+    }
+
+    fun fetchRekening(idWo: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _rekening.postValue(UIState.Loading)
+            delay(1_000)
+            try {
+                val dataPembayaran = api.getWeddingOrganizerRekening("", idWo)
+                _rekening.postValue(UIState.Success(dataPembayaran))
+            } catch (ex: Exception) {
+                _rekening.postValue(UIState.Failure("Error pada: ${ex.message}"))
             }
         }
     }
@@ -86,9 +104,26 @@ class RiwayatPesananDetailViewModel @Inject constructor(
         }
     }
 
+    fun postBuktiPembayaran(
+        post: RequestBody, idPemesanan: RequestBody, gambar: MultipartBody.Part
+    ){
+        viewModelScope.launch(Dispatchers.IO) {
+            _postBuktiPembayaran.postValue(UIState.Loading)
+            delay(1_000)
+            try {
+                val postTambahTestimoni = api.postBuktiPembayaran(post, idPemesanan, gambar)
+                _postBuktiPembayaran.postValue(UIState.Success(postTambahTestimoni))
+            } catch (ex: Exception){
+                _postBuktiPembayaran.postValue(UIState.Failure("Error: ${ex.message}"))
+            }
+        }
+    }
+
     fun getTestimoni(): LiveData<UIState<ArrayList<TestimoniModel>>> = _fetchTestimoni
     fun getDetailRiwayatPesanan(): LiveData<UIState<ArrayList<RiwayatPesananModel>>> = _detailRiwayatPesanan
+    fun getRekening(): LiveData<UIState<ArrayList<RekeningModel>>> = _rekening
     fun getResponseTambahTestimoni(): LiveData<UIState<ArrayList<ResponseModel>>> = _postTambahTestimoni
     fun getResponseUpdateTestimoni(): LiveData<UIState<ArrayList<ResponseModel>>> = _postUpdateTestimoni
+    fun getResponseBuktiPembayaran(): LiveData<UIState<ArrayList<ResponseModel>>> = _postBuktiPembayaran
 
 }

@@ -12,7 +12,14 @@
         <item>Pembayaran Ditempat</item>
     </string-array>
     <string name="ket_klik_file">Klik To Upload File</string>
-    <string name="add_image">Klik Untuk Masukkan Gambar</string>
+    <string name="add_image">Klik Untuk Upload</string>
 
     <string name="alamat">Maaf alamat belum ada. Klik untuk menambahkan alamat</string>
+    <string-array name="rekening">
+        <item>BRI</item>
+        <item>BNI</item>
+        <item>BSI</item>
+        <item>BCA</item>
+        <item>MANDIRI</item>
+    </string-array>
 </resources>

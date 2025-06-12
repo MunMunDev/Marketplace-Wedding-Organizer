@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
             setAdapterPesanan(data)
         } else{
-            Toast.makeText(this@MainActivity, "Gagal mendapatkan data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, "Pesanan Belum ada", Toast.LENGTH_SHORT).show()
         }
         setStopShimmer()
     }
