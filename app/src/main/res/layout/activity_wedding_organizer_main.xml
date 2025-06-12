@@ -11,47 +11,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
             <include
                 android:id="@+id/myAppBar"
                 layout="@layout/appbar_nav_drawer"/>
-
-<!--            <View-->
-<!--                android:id="@+id/bgHeader"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="90dp"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/titleHeader"-->
-<!--                android:background="@color/primaryColor"/>-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/ivDrawerView"-->
-<!--                android:layout_width="35dp"-->
-<!--                android:layout_height="35dp"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:src="@drawable/baseline_dehaze_24"-->
-<!--                android:elevation="10dp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/titleHeader"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@id/ivDrawerView"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                android:layout_marginTop="22dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                android:text="Wedding Organizer"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"/>-->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvVendor"
@@ -109,6 +77,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvChat"
@@ -338,123 +307,63 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--            android:id="@+id/menu"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="210dp"-->
-            <!--            app:layout_constraintTop_toBottomOf="@+id/bgHeader"-->
-            <!--            android:layout_marginTop="16dp"-->
-            <!--            android:layout_marginStart="20dp"-->
-            <!--            android:layout_marginEnd="20dp"-->
-            <!--            android:layout_marginBottom="10dp"-->
-            <!--            android:background="@drawable/bg_card"-->
-            <!--            android:elevation="10dp">-->
-            <!--            <View-->
-            <!--                android:id="@+id/pembatas"-->
-            <!--                android:layout_width="1.4dp"-->
-            <!--                android:layout_height="0dp"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintBottom_toTopOf="@id/pembatasHorizontal"-->
-            <!--                android:layout_marginTop="2dp"-->
-            <!--                android:layout_marginBottom="-2dp"-->
-            <!--                android:background="@color/abuabu_tua" />-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvRekening"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/cvRiwayatPesanan"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:cardCornerRadius="8dp"
+                android:backgroundTint="@color/white">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
+                    <ImageView
+                        android:id="@+id/ivGambarRekening"
+                        android:layout_width="90dp"
+                        android:layout_height="80dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/icon_rekening"/>
 
-            <!--            <View-->
-            <!--                android:id="@+id/pembatasHorizontal"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="1.4dp"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                android:foregroundGravity="center"-->
-            <!--                android:background="@color/abuabu_tua" />-->
+                    <TextView
+                        android:id="@+id/tvTitleRekening"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivGambarRekening"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="Halaman Rekening"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
 
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/btnHalamanPerumahan"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toStartOf="@id/pembatas"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintBottom_toTopOf="@id/pembatasHorizontal"-->
-            <!--                android:layout_marginEnd="4dp"-->
-            <!--                android:layout_marginTop="6dp"-->
-            <!--                android:layout_marginBottom="6dp"-->
-            <!--                android:gravity="top|center"-->
-            <!--                android:orientation="vertical">-->
-            <!--                <ImageView-->
-            <!--                    android:layout_width="45dp"-->
-            <!--                    android:layout_height="45dp"-->
-            <!--                    android:src="@drawable/gambar_buku"-->
-            <!--                    android:layout_marginBottom="6dp"/>-->
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Plafon"-->
-            <!--                    android:textSize="14sp"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textStyle="bold"/>-->
-            <!--            </LinearLayout>-->
+                    <TextView
+                        android:id="@+id/tvPenjelasanRekening"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitleRekening"
+                        app:layout_constraintStart_toEndOf="@id/ivGambarRekening"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="Atur Rekening yang telah terdaftar"
+                        android:textSize="14sp"
+                        android:textColor="@color/abuabu_tua"
+                        android:textStyle="bold"/>
 
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/btnHalamanBiaya"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toEndOf="@id/pembatas"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintBottom_toTopOf="@id/pembatasHorizontal"-->
-            <!--                android:layout_marginStart="4dp"-->
-            <!--                android:layout_marginTop="6dp"-->
-            <!--                android:layout_marginBottom="6dp"-->
-            <!--                android:gravity="top|center"-->
-            <!--                android:orientation="vertical">-->
-            <!--                <ImageView-->
-            <!--                    android:layout_width="45dp"-->
-            <!--                    android:layout_height="45dp"-->
-            <!--                    android:src="@drawable/gambar_video"-->
-            <!--                    android:layout_marginBottom="2dp"/>-->
-            <!--                <TextView-->
-            <!--                    android:id="@+id/tvTitleBiaya"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Pesanan"-->
-            <!--                    android:textSize="14sp"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textStyle="bold"/>-->
-            <!--            </LinearLayout>-->
-
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/btnHalamanPembayaran"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/pembatasHorizontal"-->
-            <!--                android:layout_marginEnd="4dp"-->
-            <!--                android:layout_marginTop="12dp"-->
-            <!--                android:gravity="center|bottom"-->
-            <!--                android:orientation="vertical">-->
-            <!--                <ImageView-->
-            <!--                    android:layout_width="45dp"-->
-            <!--                    android:layout_height="45dp"-->
-            <!--                    android:src="@drawable/gambar_akun"-->
-            <!--                    android:layout_marginBottom="6dp"/>-->
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Pembayaran"-->
-            <!--                    android:textSize="14sp"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:textStyle="bold"/>-->
-            <!--            </LinearLayout>-->
-
-            <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.navigation.NavigationView

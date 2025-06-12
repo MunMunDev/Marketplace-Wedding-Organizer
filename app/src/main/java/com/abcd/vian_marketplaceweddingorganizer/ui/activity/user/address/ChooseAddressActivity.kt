@@ -39,6 +39,7 @@ class ChooseAddressActivity : AppCompatActivity() {
 
     private lateinit var vendor: ArrayList<VendorModel>
     private var namaWeddingOrganizer = ""
+    private var idWo = 0
     private lateinit var listKotaKab: ArrayList<KabKotaModel>
     private var listNamaKotaKab: ArrayList<String> = arrayListOf()
     private var listNamaKecamatan: ArrayList<String> = arrayListOf()
@@ -69,6 +70,7 @@ class ChooseAddressActivity : AppCompatActivity() {
                 val i = Intent(this@ChooseAddressActivity, PaymentActivity::class.java)
                 i.putParcelableArrayListExtra("vendor", vendor)
                 i.putExtra("nama_wedding_organizer", namaWeddingOrganizer)
+                i.putExtra("idWo", idWo)
                 startActivity(i)
                 finish()
             }
@@ -84,6 +86,7 @@ class ChooseAddressActivity : AppCompatActivity() {
             vendor = arrayListOf()
             vendor = intent.getParcelableArrayListExtra("vendor")!!
             namaWeddingOrganizer = intent.getStringExtra("nama_wedding_organizer")!!
+            idWo = intent.getIntExtra("idWo", 0)
         }
     }
 

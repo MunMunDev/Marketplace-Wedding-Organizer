@@ -5,6 +5,7 @@ import com.abcd.vian_marketplaceweddingorganizer.data.model.KabKotaModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketVendorModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RekeningModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
@@ -120,6 +121,13 @@ interface ApiService {
         @Query("id_wo") id_wo: Int
     ): ArrayList<VendorModel>
 
+    // Rekening
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerRekening(
+        @Query("get_wo_rekening") get_wo_rekening: String,
+        @Query("id_wo") id_wo: Int
+    ): ArrayList<RekeningModel>
+
     // Pesanan
     @GET("marketplace-wo/api/get.php")
     suspend fun getWeddingOrganizerPesananList(
@@ -147,14 +155,10 @@ interface ApiService {
         @Query("get_admin_akun_wedding_organizer") get_admin_akun_wedding_organizer: String
     ): ArrayList<UsersModel>
 
-
-
     @GET("marketplace-wo/api/get.php")
     suspend fun getAllTestimoni(
         @Query("get_admin_all_testimoni") get_admin_all_testimoni: String,
     ): ArrayList<TestimoniModel>
-
-
 
     // POST
     @FormUrlEncoded
@@ -312,11 +316,11 @@ interface ApiService {
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postRegistrasiPembayaran(
-        @Field("post_register_pembayaran") post_register_pembayaran:String,
-        @Field("kode_unik") kode_unik: String,
+        @Field("post_pesan_online") post_pesan_online:String,
         @Field("id_user") id_user: Int,
         @Field("id_wo") id_wo: Int,
         @Field("id_vendor") id_vendor: String,
+        @Field("kode_unik") kode_unik: String,
         @Field("waktu") waktu: String,
         @Field("waktu_acara") waktu_acara: String,
     ): ArrayList<ResponseModel>
@@ -355,6 +359,34 @@ interface ApiService {
         @Field("id_pemesanan") id_pemesanan: Int,
     ): ArrayList<ResponseModel>
 
+
+    // Post rekening
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postTambahRekening(
+        @Field("post_wo_tambah_rekening") post_wo_tambah_rekening: String,
+        @Field("id_wo") id_wo: Int,
+        @Field("jenis_rekening") jenis_rekening: String,
+        @Field("no_rekening") no_rekening: String,
+        @Field("nama") nama: String
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateRekening(
+        @Field("post_wo_update_rekening") post_wo_update_rekening: String,
+        @Field("id_rekening") id_rekening: Int,
+        @Field("jenis_rekening") jenis_rekening: String,
+        @Field("no_rekening") no_rekening: Int,
+        @Field("nama") nama: String
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postDeleteRekening(
+        @Field("post_wo_delete_rekening") post_wo_delete_rekening:String,
+        @Field("id_rekening") id_rekening: Int
+    ): ArrayList<ResponseModel>
 
 
     @FormUrlEncoded
@@ -496,6 +528,20 @@ interface ApiService {
         @Field("id_testimoni") id_testimoni: String,
     ): ArrayList<ResponseModel>
 
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postBuktiPembayaran(
+        @Field("post_bukti_pembayaran") post_bukti_pembayaran:String,
+        @Field("id_pemesanan") id_pemesanan: String,
+    ): ArrayList<ResponseModel>
+
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postBuktiPembayaran(
+        @Part("post_bukti_pembayaran") post_bukti_pembayaran: RequestBody,
+        @Part("id_pemesanan") id_pemesanan: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
 
 
 }

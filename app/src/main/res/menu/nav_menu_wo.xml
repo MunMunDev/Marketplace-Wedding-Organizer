@@ -22,6 +22,9 @@
         <item
             android:id="@+id/woNavDrawerAkun"
             android:title="Akun Anda"/>
+        <item
+            android:id="@+id/woNavDrawerRekening"
+            android:title="Rekening Anda"/>
     </group>
 
     <group android:id="@+id/woDrawerBottom">

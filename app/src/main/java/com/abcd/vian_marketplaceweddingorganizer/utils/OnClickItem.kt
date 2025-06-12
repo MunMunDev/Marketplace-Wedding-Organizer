@@ -3,6 +3,7 @@ package com.abcd.vian_marketplaceweddingorganizer.utils
 import android.view.View
 import com.abcd.vian_marketplaceweddingorganizer.data.model.AlamatModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RekeningModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.VendorModel
@@ -65,6 +66,11 @@ interface OnClickItem {
     interface ClickWeddingOrganizerVendor{
         fun clickItemVendor(vendor: VendorModel, it: View)
         fun clickItemSetting(vendor: VendorModel, it: View)
+    }
+
+    interface ClickWeddingOrganizerRekening{
+        fun clickItemNama(ket:String, nama: String, it: View)
+        fun clickItemSetting(rekening: RekeningModel, it: View)
     }
 
     interface ClickAdminWeddingOrganizer{
