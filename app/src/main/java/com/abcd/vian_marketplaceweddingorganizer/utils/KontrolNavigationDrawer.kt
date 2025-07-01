@@ -9,6 +9,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.R
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.AdminMainActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.user.AdminUserActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.account.wedding_organizer.AdminWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.testimoni.AdminTestimoniActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.login.LoginActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.akun.AkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.list_chat.ChatListWeddingOrganizerActivity
@@ -17,6 +21,7 @@ import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.wedding_organi
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.akun.WeddingOrganizerAkunActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.pesanan.list.WeddingOrganizerPesananActivity
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.rekening.WeddingOrganizerRekeningActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.riwayat_pesanan.list.WeddingOrganizerRiwayatPesananActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.vendor.WeddingOrganizerVendorActivity
 
@@ -96,6 +101,11 @@ class KontrolNavigationDrawer(var context: Context) {
                         context.startActivity(intent)
                         activity.finish()
                     }
+                    R.id.woNavDrawerRekening -> {
+                        val intent = Intent(context, WeddingOrganizerRekeningActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
                     R.id.woBtnKeluar ->{
                         logout(activity)
                     }
@@ -104,9 +114,24 @@ class KontrolNavigationDrawer(var context: Context) {
             else if(sharedPreferences.getSebagai() == "admin"){
                 when(it.itemId){
                     R.id.adminNavDrawerHome -> {
-//                        val intent = Intent(context, AdminMainActivity::class.java)
-//                        context.startActivity(intent)
-//                        activity.finish()
+                        val intent = Intent(context, AdminMainActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.adminNavDrawerAkunWo -> {
+                        val intent = Intent(context, AdminWeddingOrganizerActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.adminNavDrawerAkunUser -> {
+                        val intent = Intent(context, AdminUserActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
+                    }
+                    R.id.adminNavDrawerTestimoni -> {
+                        val intent = Intent(context, AdminTestimoniActivity::class.java)
+                        context.startActivity(intent)
+                        activity.finish()
                     }
 
                     R.id.adminBtnKeluar ->{

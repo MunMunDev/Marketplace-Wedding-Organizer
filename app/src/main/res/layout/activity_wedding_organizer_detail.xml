@@ -26,36 +26,6 @@
                 android:src="@drawable/background_main2"
                 android:scaleType="fitXY"/>
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvHarga"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/ivGambarWeddingOrganizer"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintEnd_toStartOf="@id/tvRekomendasi"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:text="Rp. 150.000"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tvTitleDeskripsi"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/tvHarga"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                android:text="Deskrispi"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="14sp"-->
-<!--                android:textStyle="bold" />-->
-
             <TextView
                 android:id="@+id/tvTitleDeskripsi"
                 android:layout_width="0dp"
@@ -71,8 +41,8 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <ScrollView
-                android:id="@+id/svDeskripsi"
+            <TextView
+                android:id="@+id/tvDeskripsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleDeskripsi"
@@ -80,28 +50,68 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
-                <TextView
-                    android:id="@+id/tvDeskripsi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ini adalah deskrispi plafon"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
-            </ScrollView>
+                android:layout_marginEnd="20dp"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:text="Ini adalah deskrispi plafon"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/tvTitleVendor"
+                android:id="@+id/tvCollapseDeskripsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvDeskripsi"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="16dp"
+                android:padding="4dp"
+                android:text="Lebih Banyak"
+                android:textColor="@color/primaryColor"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvTitlePaket"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/svDeskripsi"
+                app:layout_constraintTop_toBottomOf="@id/tvCollapseDeskripsi"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="Vendor"
+                android:text="Pilih Paket"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPaket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvTitlePaket"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                tools:listitem="@layout/list_vendor_wedding_organizer_detail"
+                tools:itemCount="2"
+                />
+
+            <TextView
+                android:id="@+id/tvTitleVendor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/rvPaket"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="Pilih Items"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />

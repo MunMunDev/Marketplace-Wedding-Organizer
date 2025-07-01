@@ -3,6 +3,9 @@ package com.abcd.vian_marketplaceweddingorganizer.data.database.api
 import com.abcd.vian_marketplaceweddingorganizer.data.model.AlamatModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.KabKotaModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.MessageModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.PaketVendorModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RekeningModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
@@ -68,11 +71,23 @@ interface ApiService {
     ): ArrayList<MessageModel>
 
     @GET("marketplace-wo/api/get.php")
+    suspend fun getChatListWoWeddingOrganizer(
+        @Query("get_list_chat_wo") get_list_chat_wo: String,
+        @Query("id_pengirim") id_pengirim: Int,
+    ): ArrayList<MessageModel>
+
+    @GET("marketplace-wo/api/get.php")
     suspend fun getChatWeddingOrganizer(
         @Query("get_chat_wedding_organizer") get_chat_wedding_organizer: String,
         @Query("id_pengirim") id_pengirim: Int,
         @Query("id_penerima") id_penerima: Int,
     ): ArrayList<MessageModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getPaketVendor(
+        @Query("get_paket_vendor") get_paket_vendor: String,
+        @Query("id_wo") id_wo: Int
+    ): ArrayList<PaketModel>
 
     @GET("marketplace-wo/api/get.php")
     suspend fun getTestimoni(
@@ -112,6 +127,13 @@ interface ApiService {
         @Query("id_wo") id_wo: Int
     ): ArrayList<VendorModel>
 
+    // Rekening
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getWeddingOrganizerRekening(
+        @Query("get_wo_rekening") get_wo_rekening: String,
+        @Query("id_wo") id_wo: Int
+    ): ArrayList<RekeningModel>
+
     // Pesanan
     @GET("marketplace-wo/api/get.php")
     suspend fun getWeddingOrganizerPesananList(
@@ -132,6 +154,17 @@ interface ApiService {
     ): ArrayList<RiwayatPesananModel>
 
 
+    // Admin
+    // Akun
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getAkunWeddingOrganizer(
+        @Query("get_admin_akun_wedding_organizer") get_admin_akun_wedding_organizer: String
+    ): ArrayList<UsersModel>
+
+    @GET("marketplace-wo/api/get.php")
+    suspend fun getAllTestimoni(
+        @Query("get_admin_all_testimoni") get_admin_all_testimoni: String,
+    ): ArrayList<TestimoniModel>
 
     // POST
     @FormUrlEncoded
@@ -277,28 +310,25 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
-    suspend fun postPesan(
-        @Field("post_pesan") postPesan:String,
-        @Field("id_user") id_user: String,
-        @Field("nama_lengkap") nama_lengkap: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("alamat") alamat: String,
-        @Field("detail_alamat") detail_alamat: String,
-        @Field("metode_pembayaran") metode_pembayaran: String
+    suspend fun postPesanInPlace(
+        @Field("post_pesan_ditempat") post_pesan_ditempat:String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("id_vendor") id_vendor: String,
+        @Field("waktu") waktu: String,
+        @Field("waktu_acara") waktu_acara: String,
     ): ArrayList<ResponseModel>
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
     suspend fun postRegistrasiPembayaran(
-        @Field("registrasi_pembayaran") registrasiPembayaran:String,
-        @Field("id_pembayaran") id_pembayaran:String,
-        @Field("id_user") id_user:String,
-        @Field("keterangan") keterangan:String,
-        @Field("nama_lengkap") nama_lengkap:String,
-        @Field("nomor_hp") nomor_hp:String,
-        @Field("kecamatan_kab_kota") kecamatan_kab_kota:String,
-        @Field("alamat") alamat:String,
-        @Field("detail_alamat") detail_alamat:String,
+        @Field("post_pesan_online") post_pesan_online:String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("id_vendor") id_vendor: String,
+        @Field("kode_unik") kode_unik: String,
+        @Field("waktu") waktu: String,
+        @Field("waktu_acara") waktu_acara: String,
     ): ArrayList<ResponseModel>
 
     // Wedding Organizer
@@ -336,6 +366,34 @@ interface ApiService {
     ): ArrayList<ResponseModel>
 
 
+    // Post rekening
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postTambahRekening(
+        @Field("post_wo_tambah_rekening") post_wo_tambah_rekening: String,
+        @Field("id_wo") id_wo: Int,
+        @Field("jenis_rekening") jenis_rekening: String,
+        @Field("no_rekening") no_rekening: String,
+        @Field("nama") nama: String
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postUpdateRekening(
+        @Field("post_wo_update_rekening") post_wo_update_rekening: String,
+        @Field("id_rekening") id_rekening: Int,
+        @Field("jenis_rekening") jenis_rekening: String,
+        @Field("no_rekening") no_rekening: Int,
+        @Field("nama") nama: String
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postDeleteRekening(
+        @Field("post_wo_delete_rekening") post_wo_delete_rekening:String,
+        @Field("id_rekening") id_rekening: Int
+    ): ArrayList<ResponseModel>
+
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
@@ -363,7 +421,7 @@ interface ApiService {
         @Field("password") password: String,
         @Field("username_lama") username_lama: String,
         @Field("sebagai") sebagai: String,
-        @Field("deskripsi") deskripsi: String,
+        @Field("deskripsi_wo") deskripsi_wo: String,
     ): ArrayList<ResponseModel>
 
     @Multipart
@@ -379,6 +437,23 @@ interface ApiService {
         @Part("password") password: RequestBody,
         @Part("username_lama") username_lama: RequestBody,
         @Part("sebagai") sebagai: RequestBody,
+        @Part("deskripsi_wo") deskripsi: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
+
+
+    // Admin
+    // Akun Wedding Organizer
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postTambahAkunWoWithImage(
+        @Part("tambah_akun_wo_with_image") tambah_akun_wo_with_image: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("nomor_hp") nomor_hp: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("sebagai") sebagai: RequestBody,
         @Part("deskripsi") deskripsi: RequestBody,
         @Part gambar: MultipartBody.Part,
     ): ArrayList<ResponseModel>
@@ -387,291 +462,51 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
-    suspend fun postUpdateJenisPlafon(
-        @Field("update_jenis_plafon") updateJenisPlafon: String,
-        @Field("id_jenis_plafon") id_jenis_plafon: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("keunggulan") keunggulan: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postDeleteJenisPlafon(
-        @Field("delete_jenis_plafon") delete_jenis_plafon:String,
-        @Field("id_jenis_plafon") id_jenis_plafon: String
-    ): ArrayList<ResponseModel>
-
-    // Post Plafon
-    @Multipart
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postTambahPlafon(
-        @Part("tambah_plafon") tambah_plafon: RequestBody,
-        @Part("id_jenis_plafon") id_jenis_plafon: RequestBody,
-        @Part("keterangan") keterangan: RequestBody,
-        @Part gambar: MultipartBody.Part,
-        @Part("stok") stok: RequestBody,
-        @Part("harga") harga: RequestBody,
+    suspend fun postUpdateAdminAkunWo(
+        @Field("update_admin_akun_wo") update_admin_akun_wo: String,
+        @Field("id_user") id_user: Int,
+        @Field("id_wo") id_wo: Int,
+        @Field("nama") nama: String,
+        @Field("alamat") alamat: String,
+        @Field("nomor_hp") nomor_hp: String,
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("username_lama") username_lama: String,
+        @Field("sebagai") sebagai: String,
+        @Field("deskripsi_wo") deskripsi_wo: String,
     ): ArrayList<ResponseModel>
 
     @Multipart
     @POST("marketplace-wo/api/post.php")
-    suspend fun postUpdatePlafon(
-        @Part("update_plafon") updatePlafon: RequestBody,
-        @Part("id_plafon") id_plafon: RequestBody,
-        @Part("id_jenis_plafon") id_jenis_plafon: RequestBody,
-        @Part("keterangan") keterangan: RequestBody,
+    suspend fun postUpdateAdminAkunWoWithImage(
+        @Part("update_admin_akun_wo_with_image") update_admin_akun_wo_with_image: RequestBody,
+        @Part("id_user") id_user: RequestBody,
+        @Part("id_wo") id_wo: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("nomor_hp") nomor_hp: RequestBody,
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("username_lama") username_lama: RequestBody,
+        @Part("sebagai") sebagai: RequestBody,
+        @Part("deskripsi_wo") deskripsi: RequestBody,
         @Part gambar: MultipartBody.Part,
-        @Part("stok") stok: RequestBody,
-        @Part("harga") harga: RequestBody,
     ): ArrayList<ResponseModel>
 
+    // User
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
-    suspend fun postUpdatePlafonNoImage(
-        @Field("update_plafon_no_image") update_plafon_no_image:String,
-        @Field("id_plafon") id_plafon:String,
-        @Field("id_jenis_plafon") id_jenis_plafon:String,
-        @Field("keterangan") keterangan: String,
-        @Field("stok") stok: String,
-        @Field("harga") harga:String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postDeletePlafon(
-        @Field("delete_plafon") deletePlafon:String,
-        @Field("id_plafon") id_plafon:String
-    ): ArrayList<ResponseModel>
-
-
-//    @FormUrlEncoded
-//    @POST("marketplace-wo/api/post.php")
-//    suspend fun postTambahPesanan(
-//        @Field("tambah_pesanan") tambah_pesanan: String,
-//        @Field("id_pemesanan") id_pemesanan: String,
-//        @Field("id_user") id_user: String,
-//        @Field("nama") nama: String,
-//        @Field("alamat") alamat: String,
-//        @Field("nomor_hp") nomor_hp: String,
-//        @Field("jenis_plafon") jenis_plafon: String,
-//        @Field("harga") harga: String,
-//        @Field("panjang") panjang: String,
-//        @Field("lebar") lebar: String,
-//        @Field("total_harga") total_harga: String,
-//        @Field("waktu") waktu: String,
-//        @Field("waktu_konfirmasi") waktu_konfirmasi: String,
-//        @Field("metode_pembayaran") metode_pembayaran: String,
-//        @Field("waktu_bayar") waktu_bayar: String
-//    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postTambahPesananAdmin(
-        @Field("tambah_pesanan") tambah_pesanan: String,
-        @Field("id_pemesanan") id_pemesanan: String,
+    suspend fun postUpdateAdminAkunUser(
+        @Field("update_admin_akun_user") update_admin_akun_user: String,
+        @Field("id_user") id_user: Int,
         @Field("nama") nama: String,
         @Field("alamat") alamat: String,
         @Field("nomor_hp") nomor_hp: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("harga") harga: String,
-        @Field("panjang") panjang: String,
-        @Field("lebar") lebar: String,
-        @Field("total_harga") total_harga: String,
-        @Field("waktu") waktu: String,
-        @Field("waktu_konfirmasi") waktu_konfirmasi: String
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("username_lama") username_lama: String,
     ): ArrayList<ResponseModel>
 
-//    @FormUrlEncoded
-//    @POST("marketplace-wo/api/post.php")
-//    suspend fun postUpdatePesanan(
-//        @Field("update_pesanan") update_pesanan: String,
-//        @Field("id_pesanan") id_pesanan: String,
-//        @Field("id_user") id_user: String,
-//        @Field("nama") nama: String,
-//        @Field("alamat") alamat: String,
-//        @Field("nomor_hp") nomor_hp: String,
-//        @Field("jenis_plafon") jenis_plafon: String,
-//        @Field("harga") harga: String,
-//        @Field("panjang") panjang: String,
-//        @Field("lebar") lebar: String,
-//        @Field("total_harga") total_harga: String,
-//        @Field("gambar") gambar: String,
-//        @Field("waktu") waktu: String,
-//        @Field("waktu_konfirmasi") waktu_konfirmasi: String,
-//        @Field("metode_pembayaran") metode_pembayaran: String,
-//        @Field("waktu_bayar") waktu_bayar: String
-//    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postUpdatePesanan(
-        @Field("update_pesanan") update_pesanan: String,
-        @Field("id_pesanan") id_pesanan: String,
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("harga") harga: String,
-        @Field("panjang") panjang: String,
-        @Field("lebar") lebar: String,
-        @Field("total_harga") total_harga: String,
-        @Field("gambar") gambar: String,
-        @Field("waktu") waktu: String,
-        @Field("waktu_konfirmasi") waktu_konfirmasi: String,
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postDeletePesanan(
-        @Field("delete_pesanan") delete_pesanan:String,
-        @Field("id_pesanan") id_pesanan: String
-    ): ArrayList<ResponseModel>
-
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postAdminTambahPesananDetail(
-        @Field("admin_tambah_pesanan_detail") admin_tambah_pesanan_detail: String,
-        @Field("id_user") id_user: String,
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("id_jenis_plafon") id_jenis_plafon: String,
-        @Field("harga") harga: String,
-        @Field("panjang") panjang: String,
-        @Field("lebar") lebar: String,
-        @Field("total_harga") total_harga: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postAdminUpdatePesananDetail(
-        @Field("admin_update_pesanan_detail") admin_update_pesanan_detail: String,
-        @Field("id_pesanan") id_pesanan: String,
-        @Field("id_pemesanan") id_pemesanan: String,
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("harga") harga: String,
-        @Field("panjang") panjang: String,
-        @Field("lebar") lebar: String,
-        @Field("total_harga") total_harga: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postAdminDeletePesananDetail(
-        @Field("admin_delete_pesanan_detail") admin_delete_pesanan_detail:String,
-        @Field("id_pesanan") id_pesanan: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postAdminUpdateKonrimasiPembayaran(
-        @Field("admin_update_konfirmasi_pembayaran") admin_update_konfirmasi_pembayaran: String,
-        @Field("id_pemesanan") id_pemesanan: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postAdminUpdateKonrimasiSelesai(
-        @Field("admin_update_konfirmasi_selesai") admin_update_konfirmasi_selesai: String,
-        @Field("id_pemesanan") id_pemesanan: String
-    ): ArrayList<ResponseModel>
-
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postTambahRiwayatPesanan(
-        @Field("tambah_pesanan") tambah_pesanan: String,
-        @Field("id_pemesanan") id_pemesanan: String,
-        @Field("id_user") id_user: String,
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("harga") harga: String,
-        @Field("panjang") panjang: String,
-        @Field("lebar") lebar: String,
-        @Field("total_harga") total_harga: String,
-        @Field("waktu") waktu: String,
-        @Field("waktu_konfirmasi") waktu_konfirmasi: String,
-        @Field("metode_pembayaran") metode_pembayaran: String,
-        @Field("waktu_bayar") waktu_bayar: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postUpdateRiwayatPesanan(
-        @Field("update_pesanan") update_pesanan: String,
-        @Field("id_pesanan") id_pesanan: String,
-        @Field("id_user") id_user: String,
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("jenis_plafon") jenis_plafon: String,
-        @Field("harga") harga: String,
-        @Field("panjang") panjang: String,
-        @Field("lebar") lebar: String,
-        @Field("total_harga") total_harga: String,
-        @Field("gambar") gambar: String,
-        @Field("waktu") waktu: String,
-        @Field("waktu_konfirmasi") waktu_konfirmasi: String,
-        @Field("metode_pembayaran") metode_pembayaran: String,
-        @Field("waktu_bayar") waktu_bayar: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postDeleteRiwayatPesanan(
-        @Field("delete_pesanan") delete_pesanan:String,
-        @Field("id_riwayat_pesanan") id_riwayat_pesanan: String
-    ): ArrayList<ResponseModel>
-
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postTambahRiwayatPesananDetail(
-        @Field("admin_tambah_riwayat_pesanan_detail") admin_tambah_riwayat_pesanan_detail: String,
-        @Field("id_user") id_user: String,
-        @Field("id_pemesanan") id_pemesanan: String,
-        @Field("id_plafon") id_plafon: String,
-        @Field("nama_lengkap") nama_lengkap: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("kecamatan_kab_kota") kecamatan_kab_kota: String,
-        @Field("alamat") alamat: String,
-        @Field("detail_alamat") detail_alamat: String,
-        @Field("jumlah") jumlah: String,
-//        @Field("harga") harga: String,
-//        @Field("total_harga") total_harga: String,
-        @Field("metode_pembayaran") metode_pembayaran: String,
-//        @Field("waktu") waktu: String,
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postUpdateRiwayatPesananDetail(
-        @Field("admin_update_riwayat_pesanan_detail") admin_update_riwayat_pesanan_detail: String,
-        @Field("id_riwayat_pesanan") id_riwayat_pesanan: String,
-        @Field("id_user") id_user: String,
-        @Field("id_pemesanan") id_pemesanan: String,
-        @Field("id_plafon") id_plafon: String,
-        @Field("nama_lengkap") nama_lengkap: String,
-        @Field("nomor_hp") nomor_hp: String,
-        @Field("kecamatan_kab_kota") kecamatan_kab_kota: String,
-        @Field("alamat") alamat: String,
-        @Field("detail_alamat") detail_alamat: String,
-        @Field("jumlah") jumlah: String,
-        @Field("metode_pembayaran") metode_pembayaran: String
-    ): ArrayList<ResponseModel>
-
-    @FormUrlEncoded
-    @POST("marketplace-wo/api/post.php")
-    suspend fun postDeleteRiwayatPesananDetail(
-        @Field("admin_delete_riwayat_pesanan") admin_delete_riwayat_pesanan:String,
-        @Field("id_riwayat_pesanan") id_riwayat_pesanan: String
-    ): ArrayList<ResponseModel>
 
     @FormUrlEncoded
     @POST("marketplace-wo/api/post.php")
@@ -692,6 +527,27 @@ interface ApiService {
         @Field("bintang") bintang: String,
     ): ArrayList<ResponseModel>
 
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postDeleteTestimoni(
+        @Field("delete_testimoni") delete_testimoni:String,
+        @Field("id_testimoni") id_testimoni: String,
+    ): ArrayList<ResponseModel>
+
+    @FormUrlEncoded
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postBuktiPembayaran(
+        @Field("post_bukti_pembayaran") post_bukti_pembayaran:String,
+        @Field("id_pemesanan") id_pemesanan: String,
+    ): ArrayList<ResponseModel>
+
+    @Multipart
+    @POST("marketplace-wo/api/post.php")
+    suspend fun postBuktiPembayaran(
+        @Part("post_bukti_pembayaran") post_bukti_pembayaran: RequestBody,
+        @Part("id_pemesanan") id_pemesanan: RequestBody,
+        @Part gambar: MultipartBody.Part,
+    ): ArrayList<ResponseModel>
 
 
 }

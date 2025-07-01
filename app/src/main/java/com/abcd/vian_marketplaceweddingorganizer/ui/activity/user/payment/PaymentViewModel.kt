@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abcd.vian_marketplaceweddingorganizer.data.database.api.ApiService
 import com.abcd.vian_marketplaceweddingorganizer.data.model.AlamatModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RekeningModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +19,23 @@ import javax.inject.Inject
 class PaymentViewModel @Inject constructor(
     private val api: ApiService
 ): ViewModel() {
+    val _rekening = MutableLiveData<UIState<ArrayList<RekeningModel>>>()
     val _pembayaran = MutableLiveData<UIState<ArrayList<AlamatModel>>>()
     val _responseRegistrasiPembayaran = MutableLiveData<UIState<ArrayList<ResponseModel>>>()
     private val _postPesan = MutableLiveData<UIState<ArrayList<ResponseModel>>>()
+
+    fun fetchRekening(idWo:Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            _rekening.postValue(UIState.Loading)
+            delay(1_000)
+            try {
+                val dataPembayaran = api.getWeddingOrganizerRekening("", idWo)
+                _rekening.postValue(UIState.Success(dataPembayaran))
+            } catch (ex: Exception){
+                _rekening.postValue(UIState.Failure("Error pada: ${ex.message}"))
+            }
+        }
+    }
 
     fun fetchAlamat(idUser:Int){
         viewModelScope.launch(Dispatchers.IO) {
@@ -36,16 +51,13 @@ class PaymentViewModel @Inject constructor(
     }
 
 
-    fun postRegistrasiPembayaran(
-        id_pembayaran: String, idUser: String, keterangan:String, namaLengkap: String,
-        nomorHp: String, kecamatanKabKota:String, alamat:String, detailAlamat:String
-    ){
+    fun postRegistrasiPembayaran(idUser:Int, idWo:Int, idVendor:String, kodeUnik:String, waktu:String, waktuAcacra:String){
         viewModelScope.launch(Dispatchers.IO){
             _responseRegistrasiPembayaran.postValue(UIState.Loading)
             delay(1_000)
             try {
                 val dataRegistrasiPembayaran = api.postRegistrasiPembayaran(
-                    "", id_pembayaran, idUser, keterangan, namaLengkap, nomorHp, kecamatanKabKota, alamat, detailAlamat
+                    "", idUser, idWo, idVendor, kodeUnik, waktu, waktuAcacra
                 )
                 _responseRegistrasiPembayaran.postValue(UIState.Success(dataRegistrasiPembayaran))
             } catch (ex: Exception){
@@ -54,12 +66,12 @@ class PaymentViewModel @Inject constructor(
         }
     }
 
-    fun postPesan(idUser:String, namaLengkap:String, nomorHp:String, alamat:String, detailAlamat:String, metode_pembayaran: String){
+    fun postPesanInPlace(idUser:Int, idWo:Int, idVendor:String, waktu:String, waktuAcacra:String){
         viewModelScope.launch(Dispatchers.IO) {
             _postPesan.postValue(UIState.Loading)
             delay(1_000)
             try {
-                val fetchPesanan = api.postPesan("", idUser, namaLengkap, nomorHp, alamat, detailAlamat,metode_pembayaran)
+                val fetchPesanan = api.postPesanInPlace("", idUser, idWo, idVendor, waktu, waktuAcacra)
                 _postPesan.postValue(UIState.Success(fetchPesanan))
             } catch (ex: Exception){
                 _postPesan.postValue(UIState.Failure("Gagal : ${ex.message}"))
@@ -67,6 +79,7 @@ class PaymentViewModel @Inject constructor(
         }
     }
 
+    fun getRekening(): LiveData<UIState<ArrayList<RekeningModel>>> = _rekening
     fun getAlamat(): LiveData<UIState<ArrayList<AlamatModel>>> = _pembayaran
     fun getRegistrasiPembayaran(): LiveData<UIState<ArrayList<ResponseModel>>> = _responseRegistrasiPembayaran
     fun getPostPesan(): LiveData<UIState<ArrayList<ResponseModel>>> = _postPesan

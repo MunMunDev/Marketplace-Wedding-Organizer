@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityLoginBinding
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.admin.AdminMainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.register.RegisterActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.main.MainActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.main.WeddingOrganizerMainActivity
@@ -60,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         loginBinding.apply {
             btnLogin.setOnClickListener{
                 if(etUsername.text.isNotEmpty() && etPassword.text.isNotEmpty()){
-                    loading.alertDialogLoading(this@LoginActivity)
                     cekUsers(etUsername.text.toString(), etPassword.text.toString())
                 }
                 else{
@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun successFetchLogin(userModel: ArrayList<UsersModel>){
-        loading.alertDialogCancel()
+//        loading.alertDialogCancel()
         var valueIdUser = 0
         userModel[0].idUser?.let {
             valueIdUser = it.toInt()
@@ -135,16 +135,18 @@ class LoginActivity : AppCompatActivity() {
                 if(valueSebagai=="user"){
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 } else{
-                    Toast.makeText(this@LoginActivity, "Aadmin", Toast.LENGTH_SHORT).show()
-//                startActivity(Intent(this@LoginActivity, AdminMainActivity::class.java))
+                    Toast.makeText(this@LoginActivity, "Selamat Datang Admin", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@LoginActivity, AdminMainActivity::class.java))
                 }
             }
+            finish()
         } catch (ex: Exception){
             Toast.makeText(this@LoginActivity, "gagal: $ex", Toast.LENGTH_SHORT).show()
         }
     }
 
     var tapDuaKali = false
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (tapDuaKali){
             super.onBackPressed()

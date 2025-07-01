@@ -58,4 +58,7 @@ class RiwayatPesananModel (
 
     @SerializedName("waktu_bayar")
     val waktu_bayar: String? = null,
+
+    @SerializedName("bukti_pembayaran")
+    val bukti_pembayaran: String? = null,
 )

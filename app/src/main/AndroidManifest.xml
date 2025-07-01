@@ -30,6 +30,21 @@
             android:name=".ui.activity.wo.riwayat_pesanan.print.WeddingOrganizerPrintActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.wo.rekening.WeddingOrganizerRekeningActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.admin.testimoni.AdminTestimoniActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.admin.account.user.AdminUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.admin.account.wedding_organizer.AdminWeddingOrganizerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.admin.AdminMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.wo.akun.WeddingOrganizerAkunActivity"
             android:exported="false" />
         <activity

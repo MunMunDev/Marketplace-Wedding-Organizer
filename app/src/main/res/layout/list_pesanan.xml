@@ -43,13 +43,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvJudulWO"
         app:layout_constraintStart_toEndOf="@id/ivGambarWO"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="12dp"
         android:maxLines="1"
         android:text="Harga : "
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/abuabu_tua"
         android:elevation="20dp"/>
 
@@ -64,7 +64,7 @@
         android:layout_marginEnd="20dp"
         android:maxLines="1"
         android:text="Rp.10.0000"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/abuabu_tua"
         android:elevation="20dp"/>
 
@@ -74,13 +74,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvHarga"
         app:layout_constraintStart_toEndOf="@id/ivGambarWO"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="12dp"
         android:maxLines="1"
         android:text="Vendor : "
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/abuabu_tua"
         android:elevation="20dp"/>
 
@@ -96,7 +96,7 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:text="Fotografer, fotografer, fotografer, fotografer, fotografer"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/abuabu_tua"
         android:elevation="20dp"/>
 

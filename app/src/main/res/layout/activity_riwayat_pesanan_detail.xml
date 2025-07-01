@@ -35,7 +35,7 @@
         android:layout_marginTop="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="20dp"
-        android:text="Detail Riwayat Pesanan"
+        android:text="Detail Pesanan"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -176,7 +176,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvWO"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
                     android:maxLines="1"
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleTotalHarga"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
                     android:maxLines="1"
@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleMetodePembayaran"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
                     android:maxLines="1"
@@ -254,7 +254,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleTanggalAcara"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
                     android:maxLines="1"
@@ -280,7 +280,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleTanggalPesanan"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
                     android:maxLines="1"
@@ -306,7 +306,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/tvTitleTanggalBayar"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="14dp"
                     android:layout_marginBottom="12dp"
                     android:maxLines="1"
@@ -329,13 +329,111 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clPembayaran"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/clKeterangan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_card">
+                <TextView
+                    android:id="@+id/tvTitlePembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:maxLines="1"
+                    android:text="Daftar Bank Wedding Organizer"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvJenisRekening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitlePembayaran"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="12dp"
+                    tools:itemCount="3"/>
 
+                <TextView
+                    android:id="@+id/tvTitleBuktiPembayaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/rvJenisRekening"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:maxLines="1"
+                    android:text="Bukti Pembayaran : "
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/btnBuktiPembayaran"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleBuktiPembayaran"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivBuktiPembayaran"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="12dp"
+                    android:maxLines="1"
+                    android:text="@string/add_image"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/bg_card"/>
+
+                <TextView
+                    android:id="@+id/ivBuktiPembayaran"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitleBuktiPembayaran"
+                    app:layout_constraintStart_toEndOf="@id/btnBuktiPembayaran"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="6dp"
+                    android:maxLines="1"
+                    android:text="Lihat Bukti"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/bg_card"
+                    android:textAlignment="center"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/btnUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/btnBuktiPembayaran"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="6dp"
+                    android:maxLines="1"
+                    android:text="Upload"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/bg_card"
+                    android:textAlignment="center"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDetailRiwayatPesanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/clKeterangan"
+                app:layout_constraintTop_toBottomOf="@id/clPembayaran"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -354,8 +452,7 @@
         android:id="@+id/llBtnAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/bg_btn_no_radius">
+        app:layout_constraintBottom_toBottomOf="parent">
         <TextView
             android:id="@+id/btnTestimoni"
             android:layout_width="match_parent"
@@ -366,7 +463,8 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="center"
-            android:visibility="visible"/>
+            android:visibility="gone"
+            android:background="@drawable/bg_btn_no_radius"/>
         <TextView
             android:id="@+id/btnKonfirmasiPesanan"
             android:layout_width="match_parent"
@@ -377,7 +475,8 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:visibility="gone"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:background="@drawable/bg_btn_no_radius"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

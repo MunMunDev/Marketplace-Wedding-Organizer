@@ -11,16 +11,20 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.RiwayatPesananDetailAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityWeddingOrganizerPesananDetailBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogKonfirmasiBinding
+import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogShowImageBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.chat.chat.ChatWeddingOrganizerActivity
+import com.abcd.vian_marketplaceweddingorganizer.utils.Constant
 import com.abcd.vian_marketplaceweddingorganizer.utils.KonversiRupiah
 import com.abcd.vian_marketplaceweddingorganizer.utils.LoadingAlertDialog
 import com.abcd.vian_marketplaceweddingorganizer.utils.TanggalDanWaktu
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
 import javax.inject.Inject
@@ -42,6 +46,7 @@ class WeddingOrganizerPesananDetailActivity : AppCompatActivity() {
     lateinit var rupiah: KonversiRupiah
     @Inject
     lateinit var loading: LoadingAlertDialog
+    private var imageBuktiPembayaran: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWeddingOrganizerPesananDetailBinding.inflate(layoutInflater)
@@ -88,6 +93,13 @@ class WeddingOrganizerPesananDetailActivity : AppCompatActivity() {
             btnKonfirmasiPembayaran.setOnClickListener{
                 showAlertDialogKonfirmasiPembayaran()
             }
+            setButtonLihatBukti()
+        }
+    }
+
+    private fun setButtonLihatBukti() {
+        binding.ivBuktiPembayaran.setOnClickListener {
+            setShowImage(imageBuktiPembayaran!!,"Bukti Pembayaran")
         }
     }
 
@@ -180,7 +192,6 @@ class WeddingOrganizerPesananDetailActivity : AppCompatActivity() {
             totalHarga += values.harga!!
         }
         idWo = data[0].wo!!.id_wo!!
-        val metodePembayaran = data[0].metode_pembayaran!!
         var array = data[0].waktu_acara!!.split(" ")
         var tanggalAcara = ""
         var tanggalPesanan = ""
@@ -202,6 +213,23 @@ class WeddingOrganizerPesananDetailActivity : AppCompatActivity() {
             selesai = "On Progress"
         } else{
             selesai = "Pesanan Telah Selesai"
+        }
+
+        // Pembayaran Online
+        val metodePembayaran = data[0].metode_pembayaran!!
+        if(metodePembayaran == "Online"){
+            binding.clPembayaran.visibility = View.VISIBLE
+        } else{
+            binding.clPembayaran.visibility = View.GONE
+        }
+
+        imageBuktiPembayaran = data[0].bukti_pembayaran
+        if(imageBuktiPembayaran!!.isEmpty() || imageBuktiPembayaran==null){
+            binding.ivBuktiPembayaran.visibility = View.GONE
+            binding.tvKetTidakBuktiPembayaran.visibility = View.VISIBLE
+        } else{
+            binding.ivBuktiPembayaran.visibility = View.VISIBLE
+            binding.tvKetTidakBuktiPembayaran.visibility = View.GONE
         }
 
         val ket = data[0].ket!!
@@ -256,6 +284,29 @@ class WeddingOrganizerPesananDetailActivity : AppCompatActivity() {
                 Toast.makeText(this@WeddingOrganizerPesananDetailActivity, data[0].message_response, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setShowImage(gambar: String, jenisPlafon: String) {
+        val view = AlertDialogShowImageBinding.inflate(layoutInflater)
+
+        val alertDialog = AlertDialog.Builder(this@WeddingOrganizerPesananDetailActivity)
+        alertDialog.setView(view.root)
+            .setCancelable(false)
+        val dialogInputan = alertDialog.create()
+        dialogInputan.show()
+
+        view.apply {
+            tvTitle.text = jenisPlafon
+            btnClose.setOnClickListener {
+                dialogInputan.dismiss()
+            }
+        }
+
+        Glide.with(this@WeddingOrganizerPesananDetailActivity)
+            .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}/$gambar") // URL Gambar
+            .error(R.drawable.background_main2)
+            .into(view.ivShowImage) // imageView mana yang akan diterapkan
+
     }
 
 }

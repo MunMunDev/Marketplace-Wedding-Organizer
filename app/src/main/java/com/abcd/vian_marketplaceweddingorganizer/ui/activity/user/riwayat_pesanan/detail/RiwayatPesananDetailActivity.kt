@@ -1,22 +1,39 @@
 package com.abcd.vian_marketplaceweddingorganizer.ui.activity.user.riwayat_pesanan.detail
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.OpenableColumns
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abcd.vian_marketplaceweddingorganizer.R
+import com.abcd.vian_marketplaceweddingorganizer.adapter.ListJenisRekeningAdapter
 import com.abcd.vian_marketplaceweddingorganizer.adapter.RiwayatPesananDetailAdapter
+import com.abcd.vian_marketplaceweddingorganizer.data.model.RekeningModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.ResponseModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananModel
 import com.abcd.vian_marketplaceweddingorganizer.data.model.TestimoniModel
+import com.abcd.vian_marketplaceweddingorganizer.data.model.UsersModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityRiwayatPesananDetailBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogShowImageBinding
 import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogTestimoniTambahBinding
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.register.RegisterActivity
+import com.abcd.vian_marketplaceweddingorganizer.utils.Constant
 import com.abcd.vian_marketplaceweddingorganizer.utils.KonversiRupiah
 import com.abcd.vian_marketplaceweddingorganizer.utils.LoadingAlertDialog
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
@@ -24,6 +41,10 @@ import com.abcd.vian_marketplaceweddingorganizer.utils.TanggalDanWaktu
 import com.abcd.vian_marketplaceweddingorganizer.utils.network.UIState
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +59,10 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
     lateinit var rupiah: KonversiRupiah
     @Inject
     lateinit var loading: LoadingAlertDialog
+    private var imageBuktiPembayaran: String? = null
+    private var tempUser: UsersModel = UsersModel()
+    private var fileImage: MultipartBody.Part? = null
+    var namaWo = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRiwayatPesananDetailBinding.inflate(layoutInflater)
@@ -47,8 +72,10 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
         setDataSebelumnya()
         getRiwayatPembayaran()
         getTestimoni()
+        getRekening()
         getTambahTestimoni()
         getUpdateTestimoni()
+        getUploadBuktiPembayaran()
     }
 
     private fun setButton() {
@@ -63,6 +90,72 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
             btnKonfirmasiPesanan.setOnClickListener{
 
             }
+            btnUpload.setOnClickListener {
+                if(fileImage != null){
+                    postUploadBuktiPembayaran()
+                } else{
+                    binding.btnBuktiPembayaran.error = "Masukkan gambar"
+                }
+            }
+        }
+        setBuktiPembayaran()
+    }
+
+    private fun postUploadBuktiPembayaran() {
+        val vPost = convertStringToMultipartBody("post_bukti_pembayaran")
+        val vIdPemesanan = convertStringToMultipartBody(idPemesanan.toString())
+
+        viewModel.postBuktiPembayaran(vPost, vIdPemesanan, fileImage!!)
+    }
+
+    private fun getUploadBuktiPembayaran(){
+        viewModel.getResponseBuktiPembayaran().observe(this@RiwayatPesananDetailActivity){result->
+            when(result){
+                is UIState.Loading-> loading.alertDialogLoading(this@RiwayatPesananDetailActivity)
+                is UIState.Success-> setSuccessPostBuktiPembayaran(result.data)
+                is UIState.Failure-> setFailurePostBuktiPembayaran(result.message)
+            }
+        }
+    }
+
+    private fun setSuccessPostBuktiPembayaran(data: java.util.ArrayList<ResponseModel>) {
+        if(data.isNotEmpty()){
+            if(data[0].status == "0"){
+                fetchRekening(idWo)
+                fetchRiwayatPembayaran(idPemesanan)
+
+                fileImage = null
+                binding.btnBuktiPembayaran.text = resources.getString(R.string.ket_klik_file)
+            } else{
+                Toast.makeText(this@RiwayatPesananDetailActivity, data[0].message_response, Toast.LENGTH_SHORT).show()
+            }
+        }
+        loading.alertDialogCancel()
+    }
+
+    private fun setFailurePostBuktiPembayaran(message: String) {
+        Toast.makeText(this@RiwayatPesananDetailActivity, message, Toast.LENGTH_SHORT).show()
+        loading.alertDialogCancel()
+    }
+
+    private fun setBuktiPembayaran() {
+        setButtonUploadBukti()
+        setButtonLihatBukti()
+    }
+
+    private fun setButtonUploadBukti() {
+        binding.btnBuktiPembayaran.setOnClickListener {
+            if(checkPermission()){
+                pickImageFile()
+            } else{
+                requestPermission()
+            }
+        }
+    }
+
+    private fun setButtonLihatBukti() {
+        binding.ivBuktiPembayaran.setOnClickListener {
+            setShowImage(imageBuktiPembayaran!!,"Bukti Pembayaran")
         }
     }
 
@@ -97,6 +190,15 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
             setAlamat(data)
             setKeterangan(data)
             setAdapter(data)
+
+            imageBuktiPembayaran = data[0].bukti_pembayaran
+
+            if(data[0].bukti_pembayaran!!.isEmpty() || data[0].bukti_pembayaran == null){
+                binding.ivBuktiPembayaran.visibility = View.GONE
+            } else{
+                binding.ivBuktiPembayaran.visibility = View.VISIBLE
+                imageBuktiPembayaran = data[0].bukti_pembayaran
+            }
         } else{
             Toast.makeText(this@RiwayatPesananDetailActivity, "Tidak ada data Jenis Plafon", Toast.LENGTH_SHORT).show()
         }
@@ -118,7 +220,6 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
             totalHarga += values.harga!!
         }
         idWo = data[0].wo!!.id_wo!!
-        val metodePembayaran = data[0].metode_pembayaran!!
         var array = data[0].waktu_acara!!.split(" ")
         var tanggalAcara = ""
         var tanggalPesanan = ""
@@ -145,6 +246,27 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
             binding.btnTestimoni.visibility = View.VISIBLE
             binding.btnKonfirmasiPesanan.visibility = View.GONE
         }
+
+        val bayar = data[0].ket!!
+        if(bayar == "0"){
+            fetchRekening(idWo)
+            binding.btnKonfirmasiPesanan.visibility = View.GONE
+        } else{
+            binding.btnKonfirmasiPesanan.visibility = View.VISIBLE
+        }
+
+        // Pembayaran Online
+        val metodePembayaran = data[0].metode_pembayaran!!
+        if(metodePembayaran == "Online"){
+            binding.clPembayaran.visibility = View.VISIBLE
+        } else{
+            binding.clPembayaran.visibility = View.GONE
+        }
+
+        namaWo = data[0].wo!!.nama!!
+        binding.tvWO.text = namaWo
+        binding.tvTitlePembayaran.text = "Daftar Bank $namaWo"
+
         binding.apply {
             tvTotalHarga.text = rupiah.rupiah(totalHarga.toLong())
             tvMetodePembayaran.text = metodePembayaran
@@ -160,6 +282,40 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
         binding.apply {
             rvDetailRiwayatPesanan.layoutManager = LinearLayoutManager(this@RiwayatPesananDetailActivity, LinearLayoutManager.VERTICAL, false)
             rvDetailRiwayatPesanan.adapter = adapter
+        }
+    }
+
+    private fun fetchRekening(idWo: Int) {
+        viewModel.fetchRekening(idWo)
+    }
+    private fun getRekening(){
+        viewModel.getRekening().observe(this@RiwayatPesananDetailActivity){ result->
+            when(result){
+                is UIState.Loading->{}
+                is UIState.Success-> setSuccessFetchJenisRekening(result.data)
+                is UIState.Failure-> setFailureFetchJenisRekening(result.message)
+            }
+        }
+    }
+
+    private fun setFailureFetchJenisRekening(message: String) {
+        Toast.makeText(this@RiwayatPesananDetailActivity, message, Toast.LENGTH_SHORT).show()
+        Log.d("DetailTAG", "setFailureFetchJenisRekening: $message")
+    }
+
+    private fun setSuccessFetchJenisRekening(data: ArrayList<RekeningModel>) {
+        if(data.isNotEmpty()){
+            setAdapterRekening(data)
+        } else{
+            Toast.makeText(this@RiwayatPesananDetailActivity, "Tidak ada Rekening", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setAdapterRekening(data: ArrayList<RekeningModel>) {
+        val adapter = ListJenisRekeningAdapter(data)
+        binding.apply {
+            rvJenisRekening.layoutManager = LinearLayoutManager(this@RiwayatPesananDetailActivity, LinearLayoutManager.VERTICAL, false)
+            rvJenisRekening.adapter = adapter
         }
     }
 
@@ -444,9 +600,99 @@ class RiwayatPesananDetailActivity : AppCompatActivity() {
         }
 
         Glide.with(this@RiwayatPesananDetailActivity)
-            .load(gambar) // URL Gambar
+            .load("${Constant.BASE_URL}${Constant.LOCATION_GAMBAR}/$gambar") // URL Gambar
             .error(R.drawable.background_main2)
             .into(view.ivShowImage) // imageView mana yang akan diterapkan
 
+    }
+
+    private fun checkPermission(): Boolean{
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            //Android is 11(R) or above
+            Environment.isExternalStorageManager()
+        }
+        else{
+            //Android is below 11(R)
+            val write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            val read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            write == PackageManager.PERMISSION_GRANTED && read == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    private fun getNameFile(uri: Uri): String {
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        cursor?.moveToFirst()
+        val name = cursor?.getString(nameIndex!!)
+        cursor?.close()
+        return name!!
+    }
+
+    @SuppressLint("Recycle")
+    private fun uploadImageToStorage(pdfUri: Uri?, pdfFileName: String, nameAPI:String): MultipartBody.Part? {
+        var pdfPart : MultipartBody.Part? = null
+        pdfUri?.let {
+            val file = contentResolver.openInputStream(pdfUri)?.readBytes()
+
+            if (file != null) {
+                pdfPart = convertFileToMultipartBody(file, pdfFileName, nameAPI)
+            }
+        }
+        return pdfPart
+    }
+
+    private fun convertFileToMultipartBody(file: ByteArray, pdfFileName: String, nameAPI:String): MultipartBody.Part?{
+//        val requestFile = file.toRequestBody("application/pdf".toMediaTypeOrNull())
+        val requestFile = file.toRequestBody("application/pdf".toMediaTypeOrNull())
+        val filePart = MultipartBody.Part.createFormData(nameAPI, pdfFileName, requestFile)
+
+        return filePart
+    }
+
+    private fun requestPermission(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            if (Environment.isExternalStorageManager()) {
+                startActivity(Intent(this, RegisterActivity::class.java))
+            } else { //request for the permission
+                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                val uri = Uri.fromParts("package", packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }
+        } else{
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
+                Constant.STORAGE_PERMISSION_CODE
+            )
+        }
+    }
+
+    private fun pickImageFile() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type = "image/*"
+        }
+
+        startActivityForResult(intent, Constant.STORAGE_PERMISSION_CODE)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Constant.STORAGE_PERMISSION_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            // Mendapatkan URI file PDF yang dipilih
+            val fileUri = data.data!!
+
+            val nameImage = getNameFile(fileUri)
+
+            binding.btnBuktiPembayaran.text = nameImage
+
+            // Mengirim file PDF ke website menggunakan Retrofit
+            fileImage = uploadImageToStorage(fileUri, nameImage, "gambar")
+        }
+    }
+
+    private fun convertStringToMultipartBody(data: String): RequestBody {
+        return RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data)
     }
 }

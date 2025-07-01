@@ -8,23 +8,14 @@
             android:id="@+id/adminNavDrawerHome"
             android:title="Halaman Home"/>
         <item
-            android:id="@+id/adminNavDrawerJenisPlafon"
-            android:title="Jenis Plafon"/>
+            android:id="@+id/adminNavDrawerAkunWo"
+            android:title="Akun WO"/>
         <item
-            android:id="@+id/adminNavDrawerPlafon"
-            android:title="Plafon"/>
+            android:id="@+id/adminNavDrawerAkunUser"
+            android:title="Akun User"/>
         <item
-            android:id="@+id/adminNavDrawerKeranjangBelanja"
-            android:title="Keranjang Belanja"/>
-        <item
-            android:id="@+id/adminNavDrawerPesanan"
-            android:title="Pesanan"/>
-        <item
-            android:id="@+id/adminNavDrawerRiwayatPesanan"
-            android:title="Riwayat Pesanan"/>
-        <item
-            android:id="@+id/adminNavDrawerAkun"
-            android:title="Semua Akun"/>
+            android:id="@+id/adminNavDrawerTestimoni"
+            android:title="Testimoni"/>
     </group>
 
     <group android:id="@+id/adminDrawerBottom">
