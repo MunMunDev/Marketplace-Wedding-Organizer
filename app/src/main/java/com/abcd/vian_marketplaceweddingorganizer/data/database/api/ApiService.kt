@@ -87,6 +87,12 @@ interface ApiService {
     ): ArrayList<RiwayatPesananListModel>
 
     @GET("marketplace-wo/api/get.php")
+    suspend fun getAdminPrintLaporan(
+        @Query("get_riwayat_print_pesanan") get_riwayat_print_pesanan: String,
+        @Query("metode_pembayaran") metode_pembayaran: String
+    ): ArrayList<RiwayatPesananModel>
+
+    @GET("marketplace-wo/api/get.php")
     suspend fun getRiwayatPesananDetail(
         @Query("get_detail_riwayat_pesanan") get_detail_riwayat_pesanan: String,
         @Query("id_pemesanan") id_pemesanan: Int

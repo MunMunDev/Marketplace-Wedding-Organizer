@@ -4,15 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abcd.vian_marketplaceweddingorganizer.R
 import com.abcd.vian_marketplaceweddingorganizer.adapter.wo.WeddingOrganizerPesananListAdapter
 import com.abcd.vian_marketplaceweddingorganizer.data.model.RiwayatPesananListModel
 import com.abcd.vian_marketplaceweddingorganizer.databinding.ActivityWeddingOrganizerRiwayatPesananBinding
+import com.abcd.vian_marketplaceweddingorganizer.databinding.AlertDialogWoPrintLaporanBinding
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.pesanan.detail.WeddingOrganizerPesananDetailActivity
 import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.pesanan.list.WeddingOrganizerPesananViewModel
+import com.abcd.vian_marketplaceweddingorganizer.ui.activity.wo.riwayat_pesanan.print.WeddingOrganizerPrintActivity
 import com.abcd.vian_marketplaceweddingorganizer.utils.KontrolNavigationDrawer
 import com.abcd.vian_marketplaceweddingorganizer.utils.OnClickItem
 import com.abcd.vian_marketplaceweddingorganizer.utils.SharedPreferencesLogin
@@ -33,13 +38,14 @@ class WeddingOrganizerRiwayatPesananActivity : AppCompatActivity() {
         setStartShimmer()
         setKontrolNavigationDrawer()
         setSharedPreferencesLogin()
+        setButton()
         fetchRiwayatPesanan()
         getRiwayatPesanan()
     }
 
     private fun setKontrolNavigationDrawer() {
         binding.apply {
-            drawerView.tvTitle.text = "Pesanan"
+            drawerView.tvTitle.text = "Riwayat Pesanan"
 
             kontrolNavigationDrawer = KontrolNavigationDrawer(this@WeddingOrganizerRiwayatPesananActivity)
             kontrolNavigationDrawer.cekSebagai(navView)
@@ -49,6 +55,73 @@ class WeddingOrganizerRiwayatPesananActivity : AppCompatActivity() {
 
     private fun setSharedPreferencesLogin() {
         sharedPreferencesLogin = SharedPreferencesLogin(this@WeddingOrganizerRiwayatPesananActivity)
+    }
+
+    private fun setButton() {
+        binding.apply {
+            btnPrint.setOnClickListener {
+                setShowDialogPrintLaporan()
+            }
+        }
+    }
+
+    private fun setShowDialogPrintLaporan() {
+        val view = AlertDialogWoPrintLaporanBinding.inflate(layoutInflater)
+        val alertDialog = AlertDialog.Builder(this@WeddingOrganizerRiwayatPesananActivity)
+        alertDialog.setView(view.root)
+            .setCancelable(false)
+        val dialogInputan = alertDialog.create()
+        dialogInputan.show()
+
+        var numberPosition = 0
+        var selectedValue = ""
+
+        view.apply {
+            // Spinner Metode Pembayaran
+            val arrayAdapter = ArrayAdapter.createFromResource(
+                this@WeddingOrganizerRiwayatPesananActivity,
+                R.array.print_laporan,
+                android.R.layout.simple_spinner_item
+            )
+
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spPrintLaporan.adapter = arrayAdapter
+
+            spPrintLaporan.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    numberPosition = spPrintLaporan.selectedItemPosition
+                    selectedValue = spPrintLaporan.selectedItem.toString()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+
+            spPrintLaporan.adapter = arrayAdapter
+
+            btnPrint.setOnClickListener {
+                if(numberPosition==0){
+                    val i = Intent(this@WeddingOrganizerRiwayatPesananActivity, WeddingOrganizerPrintActivity::class.java)
+                    i.putExtra("print_laporan", "online")
+                    startActivity(i)
+                } else{
+                    val i = Intent(this@WeddingOrganizerRiwayatPesananActivity, WeddingOrganizerPrintActivity::class.java)
+                    i.putExtra("print_laporan", "ditempat")
+                    startActivity(i)
+                }
+                dialogInputan.dismiss()
+            }
+
+            btnBatal.setOnClickListener {
+                dialogInputan.dismiss()
+            }
+        }
     }
 
     private fun fetchRiwayatPesanan() {

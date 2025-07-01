@@ -20,11 +20,23 @@
                 android:id="@+id/drawerView"
                 layout="@layout/appbar_nav_drawer"/>
 
+            <Button
+                android:id="@+id/btnPrint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/drawerView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="14dp"
+                android:text="Print"
+                android:textSize="14sp"
+                android:background="@drawable/bg_btn"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPesanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/drawerView"
+                app:layout_constraintTop_toBottomOf="@id/btnPrint"
                 android:layout_marginTop="14dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -37,7 +49,7 @@
                 android:id="@+id/smListPesanan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/drawerView"
+                app:layout_constraintTop_toBottomOf="@id/btnPrint"
                 android:layout_marginTop="14dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
